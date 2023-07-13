@@ -1,1 +1,70 @@
-<p>login works!</p>
+        <div class="surface-ground px-4 py-8 md:px-6 lg:px-8">
+            <div class="flex flex-wrap shadow-2">
+                <div class="w-full lg:w-6 px-0 py-4 lg:p-7 bg-blue-50 hidden md:inline-flex">
+                    <img src="../../../../assets/images/login-bg.png" alt="Image" height="75" class="mb-6">
+                   <p-carousel [value]="imgUrl" [numVisible]="3" [numScroll]="3" [circular]="true"
+                        [autoplayInterval]="3000" [responsiveOptions]="responsiveOptions">
+                        <ng-template pTemplate="header">
+                            <h5>Welcome to Apna School</h5>
+                        </ng-template>
+                        <ng-template let-product pTemplate="item">
+                            <div class="text-center mb-8 ng-star-inserted">
+                                <img alt="Image" class="mb-6 w-6" src="{{product.url}}" height="100">
+                                <div class="mx-auto font-medium text-xl mb-4 text-blue-900">{{product.head}}</div>
+                                <p class="m-0 text-blue-700 line-height-3">
+                                    {{product.description}}
+                                </p>
+                            </div>
+                        </ng-template>
+                    </p-carousel>
+
+                </div>
+                <div class="w-full lg:w-6 p-4 lg:p-7 surface-card">
+                    <div class="flex align-items-center justify-content-between mb-7"><span
+                            class="text-2xl font-medium text-900">Login to Apna School</span>
+                            <a routerLink="/register" tabindex="0" class="font-medium text-blue-500 hover:text-blue-700 cursor-pointer transition-colors transition-duration-150">Sign
+                            up</a></div>
+                    <div class="flex justify-content-between"><button pripple="" [disabled]="true"
+                            class="p-ripple p-element mr-2 w-6 font-medium border-1 surface-border surface-100 py-3 px-2 p-component hover:surface-200 active:surface-300 text-900 cursor-pointer transition-colors transition-duration-150 inline-flex align-items-center justify-content-center"><i
+                                class="pi pi-facebook text-indigo-500 mr-2"></i><span>Sign in With Facebook</span><span
+                                class="p-ink"></span></button><button pripple="" [disabled]="true"
+                            class="p-ripple p-element ml-2 w-6 font-medium border-1 surface-border surface-100 py-3 px-2 p-component hover:surface-200 active:surface-300 text-900 cursor-pointer transition-colors transition-duration-150 inline-flex align-items-center justify-content-center"><i
+                                class="pi pi-google text-red-500 mr-2"></i><span>Sign in With Google</span><span
+                                class="p-ink"></span></button></div>
+                    <p-divider align="center" styleclass="my-4" class="p-element">
+                        <div role="separator"
+                            class="my-4 p-divider p-component p-divider-horizontal p-divider-solid p-divider-center">
+                            <div class="p-divider-content"><span class="text-600 font-normal text-sm">OR</span></div>
+                        </div>
+                    </p-divider>
+                    <label for="email4" class="block text-900 font-medium mb-2">Email</label>
+                    <input id="email4" [ngClass]="{'undefined-or-null': submitted || usermailorname == '' }" [(ngModel)]="usermailorname" type="text" placeholder="Email address"
+                        pinputtext="" class="p-inputtext p-component p-element w-full mb-3 p-3">
+                        <label for="password4"
+                        class="block text-900 font-medium mb-2">Password</label>
+                    <input id="password4" type="password" placeholder="Password" pinputtext="" [(ngModel)]="password"
+                        class="p-inputtext p-component p-element w-full mb-3 p-3">
+                    <div class="flex align-items-center justify-content-between mb-6">
+                        <div class="flex align-items-center">
+                            <p-checkbox id="rememberme4" styleclass="mr-2" class="p-element">
+                                <div class="mr-2 p-checkbox p-component">
+                                    <div class="p-hidden-accessible"><input type="checkbox" value="undefined"
+                                            aria-checked="false">
+                                    </div>
+                                    <div class="p-checkbox-box">
+                                        <!---->
+                                    </div>
+                                </div>
+                                <!---->
+                            </p-checkbox><label for="rememberme4" class="mr-2 p-3">Remember me</label>
+                        </div><a
+                            class="font-medium text-blue-500 hover:text-blue-700 cursor-pointer transition-colors transition-duration-150">Forgot
+                            password?</a>
+                    </div>
+                    <button pbutton="" pripple="" label="Sign In" (click)="fnLogin()" [disabled]="!password && !usermailorname"
+                        class="p-element p-ripple w-full py-3 font-medium p-button p-component"><span
+                            class="p-button-label">Sign
+                            In</span><span class="p-ink"></span></button>
+                </div>
+            </div>
+        </div>

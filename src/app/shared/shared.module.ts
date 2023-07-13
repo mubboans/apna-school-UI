@@ -49,11 +49,16 @@ import {PasswordModule} from 'primeng/password';
 import {OrderListModule} from 'primeng/orderlist';
 import {ChartModule} from 'primeng/chart';
 
+import { DividerModule } from "primeng/divider";
+import { NotfoundpageComponent } from './notfoundpage/notfoundpage.component';
 @NgModule({
   declarations: [
-    EditProfileComponent
+    EditProfileComponent,
+    NotfoundpageComponent
   ],
   imports: [
+    DividerModule,
+    PasswordModule,
     CommonModule,
     OrderListModule,
     ButtonModule,
@@ -111,6 +116,8 @@ import {ChartModule} from 'primeng/chart';
     AccordionModule,
   ],
   exports:[
+    DividerModule,
+    PasswordModule,
     OrderListModule,
     CommonModule,
     ButtonModule,
