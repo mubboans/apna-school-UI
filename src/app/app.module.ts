@@ -20,6 +20,7 @@ import { HttpHelperInterceptor } from './core/interceptors/http-helper.intercept
 import { HTTP_INTERCEPTORS } from '@angular/common/http';
 import { SharedModule } from './shared/shared.module';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { ChangePasswordComponent } from './core/auth-component/change-password/change-password.component';
 @NgModule({
   declarations: [
     AppComponent,
@@ -35,7 +36,8 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
     ForgotPasswordComponent,
     SidebarComponent,
     HeaderComponent,
-    FooterComponent
+    FooterComponent,
+    ChangePasswordComponent
   ],
   imports: [
     BrowserModule,
