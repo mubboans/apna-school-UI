@@ -1,8 +1,7 @@
-<div class="surface-section px-4 py-5 md:px-6 lg:px-8">
+<!-- <div class="surface-section px-4 py-5 md:px-6 lg:px-8">
     <div class="flex align-items-start flex-column lg:flex-row lg:justify-content-between">
         <div class="flex align-items-center flex-column md:flex-row">
-            <img src="../../../../assets/images/dashboard.png" (click)="showsidebar = true" class="mr-5 mb-3 lg:mb-0"
-                style="width: 90px; height: 90px;">
+           
             <div>
                 <span class="text-900 font-medium text-3xl">Kathryn Murphy</span>
                 <div class="flex align-items-center flex-wrap text-sm">
@@ -11,18 +10,70 @@
             </div>
         </div>
         <div class="mt-3 lg:mt-0">
-            <!-- <button pbutton="" pripple="" icon="pi pi-bookmark" label="Logout" 
-                class="p-element p-ripple p-button-rounded mr-2 p-button p-component p-button-icon-only"><span
-                    class="p-button-icon pi pi-power-off"></span><span
-                    class="p-ink"></span></button> -->
-                    
                     <p-button label="Logout" icon="pi pi-power-off" iconPos="left"></p-button>
         </div>
     </div>
+</div> -->
+
+<div class="grid px-5 py-2">
+    <div class="col-4 md:col-6 flex align-items-center">
+        <button pbutton pripple icon="pi pi-list" (click)="showsidebar = true"
+        class="p-element p-ripple p-button-rounded p-button p-component p-button-icon-only mr-4"><span
+            class="p-button-icon pi pi-list" aria-hidden="true"></span><span
+            class="p-ink"></span></button>
+    <img src="../../../../assets/images/dashboard.png"
+        (click)="showsidebar = true" class="mr-5 mb-3 lg:mb-0 hidden md:inline-flex"
+        style="width: 90px; height: 90px;">
+
+    </div>
+    <div class="col-8 md:col-6 flex justify-content-end headcontent">
+        <div class="mr-2 headline">
+            <span class="name text-900 font-medium text-3xl">Kathryn Murphy</span>
+            <i class="pi pi-users text-sm text-yellow"></i>
+            <div class="flex align-items-center flex-wrap text-sm">
+                <div class="mr-5 mt-3 block">
+                    <p class="font-medium text-500 text-center hidden md:inline-flex">Admin</p>
+                    <div class="text-700 mt-2 hidden md:inline-flex"> <p>{{date | date:'fullDate'}}</p></div>
+                </div>
+            </div>
+        </div>
+        <p-button label="Logout" (click)="logout()" icon="pi pi-power-off" iconPos="left"></p-button>
+    </div>
 </div>
+<!-- <div class="surface-section ">
+    <div
+        class="flex align-items-start flex-column lg:flex-row lg:justify-content-between">
 
-    <p-sidebar [(visible)]="showsidebar" showCloseIcon="true">       
-            <app-sidebar></app-sidebar>      
-      </p-sidebar>
+        <div
+            class="flex align-items-center flex-column md:flex-row justify-content-center">
+            <button pbutton pripple icon="pi pi-list"
+                class="p-element p-ripple p-button-rounded p-button p-component p-button-icon-only mr-4"><span
+                    class="p-button-icon pi pi-list" aria-hidden="true"></span><span
+                    class="p-ink"></span></button>
+            <img src="../../../../assets/images/dashboard.png"
+                (click)="showsidebar = true" class="mr-5 mb-3 lg:mb-0"
+                style="width: 90px; height: 90px;">
 
+        </div>
+        <div
+            class="lg:mt-0 align-items-center flex align-items-center flex-column md:flex-row justify-content-center">
+            <div class="mr-2">
+                <span class="text-900 font-medium text-3xl">Kathryn Murphy</span>
+                <i class="pi pi-users text-sm text-yellow"></i>
+                <div class="flex align-items-center flex-wrap text-sm">
+                    <div class="mr-5 mt-3"><span
+                            class="font-medium text-500 text-center">Admin</span>
+                        <div class="text-700 mt-2">{{date | date:'fullDate'}}</div>
+                    </div>
+                </div>
+            </div>
 
+            <p-button label="Logout" icon="pi pi-power-off" iconPos="left"></p-button>
+
+        </div>
+    </div>
+</div> -->
+
+<p-sidebar [(visible)]="showsidebar" showCloseIcon="true">
+    <app-sidebar></app-sidebar>
+</p-sidebar>

@@ -41,7 +41,7 @@
                         </div>
                     </p-divider>
                     <label for="email4" class="block text-900 font-medium mb-2">Email</label>
-                    <input id="email4" [ngClass]="{'undefined-or-null': submitted || usermailorname == '' }" [(ngModel)]="usermailorname" type="text" placeholder="Email address"
+                    <input id="email4" [ngClass]="{'undefined-or-null': submitted && identifier == '' }" [(ngModel)]="identifier" type="text" placeholder="Enter email | uname | contact"
                         pinputtext="" class="p-inputtext p-component p-element w-full mb-3 p-3">
                         <label for="password4"
                         class="block text-900 font-medium mb-2">Password</label>
@@ -64,7 +64,7 @@
                             class="font-medium text-blue-500 hover:text-blue-700 cursor-pointer transition-colors transition-duration-150">Forgot
                             password?</a>
                     </div>
-                    <button pbutton="" pripple="" label="Sign In" (click)="fnLogin()" [disabled]="!password && !usermailorname"
+                    <button pbutton="" pripple="" label="Sign In" (click)="fnLogin()" [disabled]="!password && !identifier"
                         class="p-element p-ripple w-full py-3 font-medium p-button p-component"><span
                             class="p-button-label">Sign
                             In</span><span class="p-ink"></span></button>

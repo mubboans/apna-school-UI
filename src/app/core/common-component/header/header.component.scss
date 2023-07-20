@@ -1,0 +1,11 @@
+@media all and (max-width:425px) {
+    .name{
+        font-size: 10px !important;
+    }
+    .headcontent{
+        display: flex !important;
+        // justify-content: ;
+        align-items: center;
+        justify-content:space-between !important;
+    }
+}

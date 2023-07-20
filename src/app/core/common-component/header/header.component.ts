@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { LocalStorageDataService } from '../../service/local-storage-data.service';
 
 @Component({
   selector: 'app-header',
@@ -7,10 +8,15 @@ import { Component, OnInit } from '@angular/core';
 })
 export class HeaderComponent implements OnInit {
   showsidebar: boolean = false;
-  constructor() { }
+  date=new Date()
+  constructor(public localData:LocalStorageDataService) { }
 
   ngOnInit(): void {
   }
-
+  logout(){
+    console.log('logout user');
+    
+    this.localData.logoutUser();
+  }
   
 }

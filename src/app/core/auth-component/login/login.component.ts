@@ -1,4 +1,8 @@
 import { Component, OnInit } from '@angular/core';
+import { AuthService } from '../../service/auth.service';
+import { MessageService } from 'primeng/api';
+import { Router } from '@angular/router';
+import { LocalStorageDataService } from '../../service/local-storage-data.service';
 
 @Component({
   selector: 'app-login',
@@ -23,7 +27,7 @@ export class LoginComponent implements OnInit {
         numScroll: 1
     }
 ];
-usermailorname:string;
+identifier:string;
 password:any;
 imgUrl:any=[
   {head:"Unlimited Inbox",url:"../../../../assets/images/live_collaboration.png",description:"Unlimited Inbox with data security"},
@@ -31,14 +35,28 @@ imgUrl:any=[
   {head:"Cloud Backup",url:'../../../../assets/images/subcribe.png',description:"Cloud Backup on the Internet"}
 ]
 submitted: boolean;
-  constructor() { }
+  constructor(public auth:AuthService,private messageService: MessageService,public route:Router,public localStorage:LocalStorageDataService) { }
 
   ngOnInit(): void {
   }
 fnLogin(){
 
   this.submitted=true
-  console.log(this.usermailorname,this.password);
+  this.auth.fnLogin(this.identifier,this.password).subscribe((x:any)=>{
+    console.log(x);
+
+    if(x.success){
+      let d = x.data;
+      console.log(d);
+      this.messageService.add({severity:'success', summary:'Verify User', detail:'Successfull Login',life:2000});
+      setTimeout(()=>{
+        this.localStorage.setUserLocalData(x.data);
+        this.localStorage.setToken(d.token)
+        this.route.navigate(['/dashboard']);
+      },1000) 
+    }
+  })
+  console.log(this.identifier,this.password);
   
 }
 }

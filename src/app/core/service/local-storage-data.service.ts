@@ -12,15 +12,15 @@ export class LocalStorageDataService {
     localStorage.getItem('userdata');
   }
   setUserLocalData(data){
-
+    localStorage.setItem('userdata',JSON.stringify(data))
   }
   getToken(){
     return localStorage.getItem('token');
    }
-   setToken(token){
-
-   }
-   isUserLogin(){
+  setToken(token){
+    localStorage.setItem('token',JSON.stringify(token))
+  }
+  isUserLogin(){
     return !!localStorage.getItem('userData');
   }
   logoutUser(){
