@@ -21,21 +21,25 @@
         class="p-element p-ripple p-button-rounded p-button p-component p-button-icon-only mr-4"><span
             class="p-button-icon pi pi-list" aria-hidden="true"></span><span
             class="p-ink"></span></button>
-    <img src="../../../../assets/images/dashboard.png"
+    <img src={{user.profileImg}}
         (click)="showsidebar = true" class="mr-5 mb-3 lg:mb-0 hidden md:inline-flex"
         style="width: 90px; height: 90px;">
 
     </div>
-    <div class="col-8 md:col-6 flex justify-content-end headcontent">
+    <div class="col-8 md:col-6 flex justify-content-end headcontent align-items-center">
         <div class="mr-2 headline">
-            <span class="name text-900 font-medium text-3xl">Kathryn Murphy</span>
+            <!-- <span class="name text-900 font-medium text-3xl">{{user.name | uppercase}}</span>
             <i class="pi pi-users text-sm text-yellow"></i>
             <div class="flex align-items-center flex-wrap text-sm">
                 <div class="mr-5 mt-3 block">
-                    <p class="font-medium text-500 text-center hidden md:inline-flex">Admin</p>
+                    <p class="font-medium text-500 text-center hidden md:inline-flex">{{user.role}}</p>
                     <div class="text-700 mt-2 hidden md:inline-flex"> <p>{{date | date:'fullDate'}}</p></div>
                 </div>
+            </div> -->
+            <div class="text-700 mt-2 hidden md:inline-flex"> 
+                <p-chip label="{{date | date:'fullDate'}}" icon="pi pi-calendar-times mr-2" [removable]="true"></p-chip> 
             </div>
+            <p-chip label={{user.name}} icon="pi pi-users"></p-chip>
         </div>
         <p-button label="Logout" (click)="logout()" icon="pi pi-power-off" iconPos="left"></p-button>
     </div>

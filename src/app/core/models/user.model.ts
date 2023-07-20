@@ -6,4 +6,6 @@ export class User{
     password?:string;
     confirmpassword?:string;
     contact?:string;
+    profileImg?:string;
+    token?:string;
 } 

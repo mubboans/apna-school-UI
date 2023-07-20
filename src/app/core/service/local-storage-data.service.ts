@@ -9,7 +9,8 @@ export class LocalStorageDataService {
   constructor(public route:Router) { }
 
   getUserLocalData(){
-    localStorage.getItem('userdata');
+   const d= localStorage.getItem('userdata');
+   return d ? JSON.parse(d):[];
   }
   setUserLocalData(data){
     localStorage.setItem('userdata',JSON.stringify(data))
@@ -21,10 +22,10 @@ export class LocalStorageDataService {
     localStorage.setItem('token',JSON.stringify(token))
   }
   isUserLogin(){
-    return !!localStorage.getItem('userData');
+    return !!localStorage.getItem('userdata');
   }
   logoutUser(){
-    localStorage.removeItem('userData');
+    localStorage.removeItem('userdata');
     localStorage.removeItem('token');
     localStorage.clear();
     this.route.navigate(['/login']);

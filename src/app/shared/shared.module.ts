@@ -48,7 +48,7 @@ import { ConfirmationService, MessageService } from 'primeng/api';
 import {PasswordModule} from 'primeng/password';
 import {OrderListModule} from 'primeng/orderlist';
 import {ChartModule} from 'primeng/chart';
-
+import { ChipModule } from 'primeng/chip';
 import { DividerModule } from "primeng/divider";
 import { NotfoundpageComponent } from './notfoundpage/notfoundpage.component';
 @NgModule({
@@ -58,6 +58,7 @@ import { NotfoundpageComponent } from './notfoundpage/notfoundpage.component';
   ],
   imports: [
     DividerModule,
+    ChipModule,
     PasswordModule,
     CommonModule,
     OrderListModule,
@@ -117,6 +118,7 @@ import { NotfoundpageComponent } from './notfoundpage/notfoundpage.component';
   ],
   exports:[
     DividerModule,
+    ChipModule,
     PasswordModule,
     OrderListModule,
     CommonModule,

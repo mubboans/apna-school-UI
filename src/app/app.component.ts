@@ -8,9 +8,9 @@ import { LocalStorageDataService } from './core/service/local-storage-data.servi
 })
 export class AppComponent implements OnInit {
   constructor(public localData:LocalStorageDataService){}
-  showHeader = this.localData.isUserLogin();
+  showHeader:boolean;
   ngOnInit(): void {
-console.log(this.showHeader);
+console.log(this.showHeader,this.localData.isUserLogin());
 
   }
   title = 'Angular-Lean-Structure';

@@ -1,8 +1,9 @@
 <!-- <button pButton pRipple label="btn check" type="button" icon="pi pi-check" class="p-button-rounded mx-auto"></button> -->
 <div class="card">
 
-<app-header *ngIf="localData.isUserLogin()"></app-header>
+<app-header *ngIf="localData.isUserLogin() || showHeader"></app-header>
 <router-outlet>
   
 </router-outlet>
 </div>
+<p-toast [breakpoints]="{'920px': {width: '100%', right: '0', left: '0'}}" position="bottom-right" [showTransformOptions]="'translateX(100%)'"></p-toast>
