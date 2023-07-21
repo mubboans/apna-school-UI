@@ -20,6 +20,7 @@ import { HTTP_INTERCEPTORS } from '@angular/common/http';
 import { SharedModule } from './shared/shared.module';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { ChangePasswordComponent } from './core/auth-component/change-password/change-password.component';
+import { TimeTableComponent } from './features/time-table/time-table.component';
 @NgModule({
   declarations: [
     AppComponent,
@@ -36,7 +37,8 @@ import { ChangePasswordComponent } from './core/auth-component/change-password/c
     SidebarComponent,
     HeaderComponent,
     FooterComponent,
-    ChangePasswordComponent
+    ChangePasswordComponent,
+    TimeTableComponent
   ],
   imports: [
     BrowserModule,
