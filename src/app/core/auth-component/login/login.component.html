@@ -45,8 +45,14 @@
                         pinputtext="" class="p-inputtext p-component p-element w-full mb-3 p-3">
                         <label for="password4"
                         class="block text-900 font-medium mb-2">Password</label>
-                    <input id="password4" type="password" placeholder="Password" pinputtext="" [(ngModel)]="password"
-                        class="p-inputtext p-component p-element w-full mb-3 p-3">
+
+                    <!-- <input id="password4" type="password" placeholder="Password" pinputtext="" [(ngModel)]="password"
+                        class="p-inputtext p-component p-element w-full mb-3 p-3"> -->
+                        <div class="w-full">
+                            
+                            <p-password styleClass="p-inputtext p-component" [style]="{'width':'100%','margin-bottom':'10px'}" [feedback]="false" [(ngModel)]="password" placeholder="Password" [toggleMask]="true"></p-password>
+                        </div>
+
                     <div class="flex align-items-center justify-content-between mb-6">
                         <div class="flex align-items-center">
                             <p-checkbox id="rememberme4" styleclass="mr-2" class="p-element">

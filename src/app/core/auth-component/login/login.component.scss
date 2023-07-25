@@ -13,6 +13,16 @@
     }
 }
 
+:host::ng-deep{
+    .p-inputtext {
+        margin: 0;
+        width: 100%;
+    }
+    .p-password-input{
+        border: none;
+    }
+}
+
 .undefined-or-null {
     border: 2px solid red;
   }

@@ -20,4 +20,19 @@ fnLogin(identifier, password){
   }),catchError(this.global.handleError)
   )
 }
+fnChangePassword(obj){
+  return this.http.post(this.authurl+'forgot-password',obj).pipe(
+    map((x:any)=>{
+      return x;
+    }),
+    catchError(this.global.handleError)
+  )
+}
+fnResetPassword(email){
+  const d ={
+    email: email
+  }
+  return this.http.post(this.authurl+'forgot-password-link',d).pipe(map((x:any)=>{}),
+  catchError(this.global.handleError))
+}
 }

@@ -43,8 +43,6 @@ fnLogin(){
 
   this.submitted=true
   this.auth.fnLogin(this.identifier,this.password).subscribe((x:any)=>{
-    console.log(x);
-
     if(x.success){
       let d = x.data;
       console.log(d);

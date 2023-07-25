@@ -1,5 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { AuthService } from '../../service/auth.service';
+import { MessageService } from 'primeng/api';
 
 @Component({
   selector: 'app-change-password',
@@ -9,7 +11,7 @@ import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 export class ChangePasswordComponent implements OnInit {
 changePasswordGroup:FormGroup
 passwordmatch:boolean=false;
-  constructor(public fb:FormBuilder) { 
+  constructor(public fb:FormBuilder,public authService:AuthService,private messageService: MessageService) { 
     this.changePasswordGroup= fb.group({
       password:fb.control('',Validators.required),
       confirmpassword:fb.control('',Validators.required),
@@ -26,9 +28,16 @@ passwordmatch:boolean=false;
       }
     })
   }
+  ChangePassword(){
+    console.log(this.changePasswordGroup.value);
+    this.authService.fnChangePassword(this.changePasswordGroup.value).subscribe((x:any)=>{
+      this.messageService.add({severity:'success', summary:x.message, detail:x.status,life:2000});
+    },(err)=>{
 
+    })
+  }
   ngOnInit(): void {
-    console.log(this.formControl,'this.formControl')
+    this.messageService.add({severity:'success', summary:"x.message", detail:"x.status",life:2000});
   }
 
   // onPasswordChange(val1,val2) {

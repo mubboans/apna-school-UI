@@ -12,7 +12,7 @@ export class AuthGuardGuard implements CanActivate {
   canActivate(
     route: ActivatedRouteSnapshot,
     state: RouterStateSnapshot): Observable<boolean | UrlTree> | Promise<boolean | UrlTree> | boolean | UrlTree {
-      let data = this.locSesStorage.getLocalData();
+      let data = this.locSesStorage.getUserLocalData();
       if(data){
         return true;
       }
