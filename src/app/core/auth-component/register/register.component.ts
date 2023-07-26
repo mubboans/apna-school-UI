@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { FormGroup } from '@angular/forms';
+import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { User } from '../../models/user.model';
 
 @Component({
@@ -13,15 +13,28 @@ export class RegisterComponent implements OnInit {
   showconfirmpass:boolean=false;
   passwordmatch:boolean;
   typearr=[
-    {role:"Student",value:1},
-    {role:"Teacher",value:2}
+    {role:"Student",value:'student'},
+    {role:"Teacher",value:'teacher'},
+    {role:"Staff",value:'staff'}
   ]
   password:string;
   user:User;
-  constructor() { }
+  constructor(public fb:FormBuilder) {
+    this.regForm=fb.group({
+      name:fb.control('',Validators.required),
+      password:fb.control('',Validators.required),
+      confirmpassword:fb.control('',Validators.required),
+      email:fb.control('',Validators.required),
+      contact:fb.control('',Validators.required),
+      DOB:fb.control('',Validators.required),
+      role:fb.control('',Validators.required),
+    });
+   }
 
   ngOnInit(): void {
     this.user = new User();
   }
-
+registerUser(){
+  console.log(this.regForm.value,this.regForm.valid);
+}
 }
