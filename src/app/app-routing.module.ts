@@ -15,11 +15,12 @@ const routes: Routes = [
   {path:'change-password',component:ChangePasswordComponent},
   {path:'dashboard',component:DashboardComponent},
   { path: 'admin', loadChildren: () => import('./features/adminmodule/adminmodule.module').then(m => m.AdminmoduleModule) },
+  { path: 'general', loadChildren: () => import('./features/generalmodule/generalmodule.module').then(m => m.GeneralmoduleModule) },
   {path:'**',pathMatch:'full',redirectTo:'not-found'}
 ];
-
+// , enableTracing: true 
 @NgModule({
-  imports: [RouterModule.forRoot(routes,{useHash:true, enableTracing: true })],
+  imports: [RouterModule.forRoot(routes,{useHash:true})],
   exports: [RouterModule]
 })
 export class AppRoutingModule { }

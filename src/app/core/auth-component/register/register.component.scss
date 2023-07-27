@@ -4,3 +4,13 @@
         width: 100%;
     }
 }
+@media all and (max-width:426px){
+    .rolendob{
+        display: flex !important;
+        justify-content: center !important;
+    }    
+}
+.rolendob{
+    display: flex;
+    justify-content: space-between;
+}

@@ -19,6 +19,7 @@ export class RegisterComponent implements OnInit {
   ]
   password:string;
   user:User;
+  showSubmit:boolean = true;
   constructor(public fb:FormBuilder) {
     this.regForm=fb.group({
       name:fb.control('',Validators.required),
@@ -29,9 +30,19 @@ export class RegisterComponent implements OnInit {
       DOB:fb.control('',Validators.required),
       role:fb.control('',Validators.required),
     });
+    this.regForm.valueChanges.subscribe((x)=>{
+      if(this.regForm.valid){
+        this.showSubmit =false; 
+      }
+      console.log(this.showSubmit);
+      
+    })
    }
-
+get formControl(){
+  return this.regForm.controls
+}
   ngOnInit(): void {
+    console.log(this.formControl);
     this.user = new User();
   }
 registerUser(){
