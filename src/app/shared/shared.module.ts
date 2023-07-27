@@ -43,7 +43,6 @@ import { ToastModule } from 'primeng/toast';
 import { ToggleButtonModule } from 'primeng/togglebutton';
 import { ToolbarModule } from 'primeng/toolbar';
 import { TooltipModule } from 'primeng/tooltip';
-import { AppRoutingModule } from 'src/app/app-routing.module';
 import { ConfirmationService, MessageService } from 'primeng/api';
 import {PasswordModule} from 'primeng/password';
 import {OrderListModule} from 'primeng/orderlist';
@@ -72,7 +71,6 @@ import { NotfoundpageComponent } from './notfoundpage/notfoundpage.component';
     DropdownModule,
    CheckboxModule,
     TabMenuModule,
-    AppRoutingModule,
     MenubarModule,
     TieredMenuModule,
     ButtonModule,
@@ -132,7 +130,6 @@ import { NotfoundpageComponent } from './notfoundpage/notfoundpage.component';
     DropdownModule,
    CheckboxModule,
     TabMenuModule,
-    AppRoutingModule,
     MenubarModule,
     TieredMenuModule,
     ButtonModule,

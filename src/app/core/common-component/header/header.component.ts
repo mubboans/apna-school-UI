@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { LocalStorageDataService } from '../../service/local-storage-data.service';
 import { User } from '../../models/user.model';
+import { GlobalService } from '../../service/global.service';
 
 @Component({
   selector: 'app-header',
@@ -14,10 +15,15 @@ export class HeaderComponent implements OnInit {
   userProfile:string;
   userRole:string;
   user:User;
-  constructor(public localData:LocalStorageDataService) { }
+  constructor(public localData:LocalStorageDataService,public global:GlobalService) { }
 
   ngOnInit(): void {
     this.user=this.localData.getUserLocalData();
+    this.global.showSideBar.subscribe((x)=>{
+      this.showsidebar=x;
+      console.log(this.showsidebar);
+      
+    })
   }
   logout(){
     console.log('logout user');

@@ -2,7 +2,7 @@ export class User{
     name?:string;
     dob?:Date;
     email?:string;
-    role?:number;
+    role?:string;
     password?:string;
     confirmpassword?:string;
     contact?:string;

@@ -17,12 +17,12 @@
 
 <div class="grid px-5 py-2">
     <div class="col-4 md:col-6 flex align-items-center">
-        <button pbutton pripple icon="pi pi-list" (click)="showsidebar = true"
+        <button pbutton pripple icon="pi pi-list" (click)="global.showSidebar()"
         class="p-element p-ripple p-button-rounded p-button p-component p-button-icon-only mr-4"><span
             class="p-button-icon pi pi-list" aria-hidden="true"></span><span
             class="p-ink"></span></button>
     <img src={{user.profileImg}}
-        (click)="showsidebar = true" class="mr-5 mb-3 lg:mb-0 hidden md:inline-flex"
+        class="mr-5 mb-3 lg:mb-0 hidden md:inline-flex"
         style="width: 90px; height: 90px;">
 
     </div>
