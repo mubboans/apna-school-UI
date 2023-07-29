@@ -1,6 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { User } from '../../models/user.model';
+import { AuthService } from '../../service/auth.service';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-register',
@@ -20,12 +22,12 @@ export class RegisterComponent implements OnInit {
   password:string;
   user:User;
   showSubmit:boolean = true;
-  constructor(public fb:FormBuilder) {
+  constructor(public fb:FormBuilder,public auth:AuthService,public route:Router) {
     this.regForm=fb.group({
       name:fb.control('',Validators.required),
       password:fb.control('',Validators.required),
       confirmpassword:fb.control('',Validators.required),
-      email:fb.control('',Validators.required),
+      email:fb.control('',[Validators.required,Validators.email,Validators.pattern('^[a-z0-9._%+-]+@[a-z0-9.-]+\\.[a-z]{2,4}$')]),
       contact:fb.control('',Validators.required),
       DOB:fb.control('',Validators.required),
       role:fb.control('',Validators.required),
@@ -33,19 +35,42 @@ export class RegisterComponent implements OnInit {
     this.regForm.valueChanges.subscribe((x)=>{
       if(this.regForm.valid){
         this.showSubmit =false; 
+        console.log(this.showSubmit);
       }
-      console.log(this.showSubmit);
-      
     })
    }
-get formControl(){
-  return this.regForm.controls
-}
+
+   onPasswordChange() {
+    if(this.regForm.get('password').value && this.regForm.get('confirmpassword').value){
+    if (this.regForm.get('password').value == this.regForm.get('confirmpassword').value) {
+      this.passwordmatch=false;
+    } else {
+     this.passwordmatch=true;
+    }
+  }
+  }
+
+   get formControl(){
+    this.onPasswordChange()
+    // console.log(this.formControl,'formControl');
+    return this.regForm.controls
+   }
   ngOnInit(): void {
-    console.log(this.formControl);
     this.user = new User();
+    console.log(this.formControl.email);
+    
   }
 registerUser(){
   console.log(this.regForm.value,this.regForm.valid);
+  this.auth.fnRegister(this.regForm.value).subscribe((x:any)=>{
+      if(x.success){
+          if(x.data.role == 'admin'){
+            this.route.navigate(['/admins']);
+          }
+          else{
+            this.route.navigate(['/general']);
+          }
+      }
+  })
 }
 }

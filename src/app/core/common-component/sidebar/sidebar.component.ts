@@ -13,7 +13,7 @@ export class SidebarComponent implements OnInit {
   constructor(public global:GlobalService,public localStoreData:LocalStorageDataService) { }
 
   ngOnInit(): void {
-    this.users=this.localStoreData.getUserLocalData();
+    this.users=this.global.user;
   }
 
 }

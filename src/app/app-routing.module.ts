@@ -6,6 +6,7 @@ import { NotfoundpageComponent } from './shared/notfoundpage/notfoundpage.compon
 import { ForgotPasswordComponent } from './core/auth-component/forgot-password/forgot-password.component';
 import { ChangePasswordComponent } from './core/auth-component/change-password/change-password.component';
 import { DashboardComponent } from './features/dashboard/dashboard.component';
+import { EditProfileComponent } from './shared/edit-profile/edit-profile.component';
 
 const routes: Routes = [
   {path:'register',component:RegisterComponent},
@@ -14,6 +15,7 @@ const routes: Routes = [
   {path:'forgot-password',component:ForgotPasswordComponent},
   {path:'change-password',component:ChangePasswordComponent},
   {path:'dashboard',component:DashboardComponent},
+  {path:'profile',component:EditProfileComponent},
   { path: 'admin', loadChildren: () => import('./features/adminmodule/adminmodule.module').then(m => m.AdminmoduleModule) },
   { path: 'general', loadChildren: () => import('./features/generalmodule/generalmodule.module').then(m => m.GeneralmoduleModule) },
   {path:'**',pathMatch:'full',redirectTo:'not-found'}

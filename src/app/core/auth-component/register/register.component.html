@@ -15,6 +15,14 @@
       <label for="email1" class="block text-900 font-medium mb-2">Email</label>
       <input id="email1" type="text" formControlName="email"
         placeholder="Email address" pinputtext="" class="p-inputtext p-component p-element w-full mb-3">
+
+        <div class="error mb-2 text-center" *ngIf="formControl.email.errors?.pattern && (formControl.email.touched && formControl.email.invalid)">
+          <small>Provide Valid Email Address</small>
+      </div> 
+        <div class="error mb-2 text-center" *ngIf="formControl.email.errors?.required && (formControl.email.touched && formControl.email.invalid)">
+          <small>Email Required</small>
+      </div>
+
         <label for="contact" class="block text-900 font-medium mb-2">Contact</label>
       <input id="contact" type="text" formControlName="contact"
         placeholder="Contact" pinputtext="" class="p-inputtext p-component p-element w-full mb-3">
@@ -36,11 +44,20 @@
         </ng-template>
     </p-password>
     </div>
+
     <label for="confirmpassword" class="block text-900 font-medium mb-2">Confirm Password</label>
-    <input id="confirmpassword" type="password" formControlName="confirmpassword"
-        placeholder="Confirm Password" pinputtext="" class="p-inputtext p-component p-element w-full mb-3">
+    <div class="w-full">
+      <p-password formControlName="confirmpassword" [feedback]="false" [style]="{'width':'100%','margin-bottom':'10px'}" placeholder="Confirm Password" [toggleMask]="true"></p-password>
+    </div>
+    <!-- <input id="confirmpassword" type="password" formControlName="confirmpassword"
+        placeholder="Confirm Password" pinputtext="" class="p-inputtext p-component p-element w-full mb-3"> -->
         <!-- <input id="password1" type="password" placeholder="Password" pinputtext="" class="p-inputtext p-component p-element w-full mb-3"> -->
+      
+        <div class="error mb-2 text-center" *ngIf="passwordmatch">
+          <small class="error">Password Not Match</small>
+      </div>
         
+
         <div class="rolendob text-center mb-2 p-2">
           <div class="w-full">
             <label for="password1" class="block text-900 font-medium mb-2">Select Role</label>

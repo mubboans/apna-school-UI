@@ -18,7 +18,7 @@ export class HeaderComponent implements OnInit {
   constructor(public localData:LocalStorageDataService,public global:GlobalService) { }
 
   ngOnInit(): void {
-    this.user=this.localData.getUserLocalData();
+    this.user=this.global.user;
     this.global.showSideBar.subscribe((x)=>{
       this.showsidebar=x;
       console.log(this.showsidebar);
@@ -27,7 +27,6 @@ export class HeaderComponent implements OnInit {
   }
   logout(){
     console.log('logout user');
-    
     this.localData.logoutUser();
   }
   
