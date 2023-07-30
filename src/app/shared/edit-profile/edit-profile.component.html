@@ -1,37 +1,53 @@
 
-<div class="card px-4 py-3 md:px-6 lg:px-8" >
-    <h3>Edit Profile</h3>
-    <div class="formgrid grid">
+<div class="card px-4 py-3 md:px-6 lg:px-8">
+    <div class="flex header"></div>
+    <p-toolbar class="m-4 p-4">
+        <div class="p-toolbar-group-left">
+            <h3>Edit login detail</h3>
+        </div>
+        <div class="p-toolbar-group-right">
+            <p-button (click)="UpdateUserprofile()" label="Save changed" icon="pi pi-upload" styleClass="p-button-success"></p-button>
+        </div>
+    </p-toolbar>
+  
+    <div class="formgrid grid" *ngIf="userprofileData;else skeleton">
         <div class="field col-12 md:col-6">
-            <label for="firstname6">Firstname</label>
-            <input id="firstname6" type="text" class="text-base text-color surface-overlay p-2 border-1 border-solid surface-border border-round appearance-none outline-none focus:border-primary w-full">
+            <label for="firstname6">Name</label>
+            <input id="firstname6" [(ngModel)]="userprofileData.name" type="text" class="text-base text-color surface-overlay p-2 border-1 border-solid surface-border border-round appearance-none outline-none focus:border-primary w-full">
         </div>
         <div class="field col-12 md:col-6">
-            <label for="lastname6">Lastname</label>
-            <input id="lastname6" type="text" class="text-base text-color surface-overlay p-2 border-1 border-solid surface-border border-round appearance-none outline-none focus:border-primary w-full">
+            <label for="lastname6">Contact</label>
+            <input id="lastname6" [(ngModel)]="userprofileData.contact" type="text" class="text-base text-color surface-overlay p-2 border-1 border-solid surface-border border-round appearance-none outline-none focus:border-primary w-full">
         </div>
-        <div class="field col-12">
+        <div class="field col-12 md:col-4">
+            <label for="lastname6">Email</label>
+            <input id="lastname6" [(ngModel)]="userprofileData.email" type="text" class="text-base text-color surface-overlay p-2 border-1 border-solid surface-border border-round appearance-none outline-none focus:border-primary w-full">
+        </div>
+        <!-- <div class="field col-12">
             <label for="address">Address</label>
             <textarea id="address" type="text" rows="4" class="text-base text-color surface-overlay p-2 border-1 border-solid surface-border border-round appearance-none outline-none focus:border-primary w-full"></textarea>
-        </div>
-        <div class="field col-12 md:col-6">
-            <label for="city">City</label>
-            <input id="city" type="text" class="text-base text-color surface-overlay p-2 border-1 border-solid surface-border border-round appearance-none outline-none focus:border-primary w-full">
-        </div>
+        </div> -->
         <div class="field col-12 md:col-3">
-            <label for="state">State</label>
-            <select id="state" class="w-full text-base text-color surface-overlay p-2 border-1 border-solid surface-border border-round outline-none focus:border-primary" style="appearance: auto">
-                <option>Arizona</option>
-                <option>California</option>
-                <option>Florida</option>
-                <option>Ohio</option>
-                <option>Washington</option>
-            </select>
+            <label for="city">Created On</label> <br>
+            <p-chip label="{{userprofileData.createdAt | date:'yyyy-MM-dd'}}" class="text-base text-color surface-overlay p-2  appearance-none outline-none focus:border-primary w-full"></p-chip>
+            <!-- <input id="lastname6"  [(ngModel)]="userprofileData.createdAt" type="text" class="text-base text-color surface-overlay p-2 border-1 border-solid surface-border border-round appearance-none outline-none focus:border-primary w-full"> -->
         </div>
-        <div class="field col-12 md:col-3">
-            <label for="zip">Zip</label>
-            <input id="zip" type="text" class="text-base text-color surface-overlay p-2 border-1 border-solid surface-border border-round appearance-none outline-none focus:border-primary w-full">
+        <div class="field col-12 md:col-5">
+            <label for="city">Password</label>
+            <p-password [disabled]="true" [(ngModel)]="userprofileData.password" [toggleMask]="true" [feedback]="false" [style]="{'width':'100%','margin-bottom':'10px'}"></p-password>
         </div>
     </div>
+   
+    <p-toolbar class="m-4 p-4">
+        <div class="p-toolbar-group-left">
+            <h3>Student details</h3>
+        </div>
+        <div class="p-toolbar-group-right">
+            <p-button label="Save changed" icon="pi pi-upload" styleClass="p-button-warning"></p-button>
+        </div>
+    </p-toolbar>
 </div>
+<ng-template #skeleton> 
+    <app-card-skeleton></app-card-skeleton>
+</ng-template>
 

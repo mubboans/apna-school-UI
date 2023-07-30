@@ -15,4 +15,5 @@ export class User{
     updatedAt?:Date;
     userDetailId?:string;
     _id?:string;
+    creationDate?:any;
     } 

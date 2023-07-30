@@ -1,3 +1,4 @@
+import { DatePipe } from '@angular/common';
 import { Component, OnInit } from '@angular/core';
 import { User } from 'src/app/core/models/user.model';
 import { GlobalService } from 'src/app/core/service/global.service';
@@ -21,8 +22,19 @@ export class EditProfileComponent implements OnInit {
   this.profile.getProfileDetailithId(this.user.id).subscribe((x:any)=>{
     if(x.success) {
       this.userprofileData = x.data;
+      // this.userprofileData.creationDate =this.datePipe.transform(this.userprofileData.createdAt, 'yyyy-MM-dd')
       console.log(this.userprofileData,'user profiile');
     }
+    
+  })
+ }
+ UpdateUserprofile(){
+  this.profile.fnUpdateUser(this.userprofileData,this.userprofileData._id).subscribe((x:any) => {
+      if(x.success){
+        this.global.showToast('success',x.message,x.status);
+      }
+  },(err:any) => {
+    console.log(err);
     
   })
  }

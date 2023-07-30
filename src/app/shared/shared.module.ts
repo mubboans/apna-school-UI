@@ -42,6 +42,7 @@ import { TimelineModule } from 'primeng/timeline';
 import { ToastModule } from 'primeng/toast';
 import { ToggleButtonModule } from 'primeng/togglebutton';
 import { ToolbarModule } from 'primeng/toolbar';
+import {SkeletonModule} from 'primeng/skeleton';
 import { TooltipModule } from 'primeng/tooltip';
 import { ConfirmationService, MessageService } from 'primeng/api';
 import {PasswordModule} from 'primeng/password';
@@ -50,12 +51,15 @@ import {ChartModule} from 'primeng/chart';
 import { ChipModule } from 'primeng/chip';
 import { DividerModule } from "primeng/divider";
 import { NotfoundpageComponent } from './notfoundpage/notfoundpage.component';
+import { CardSkeletonComponent } from './card-skeleton/card-skeleton.component';
 @NgModule({
   declarations: [
     EditProfileComponent,
-    NotfoundpageComponent
+    NotfoundpageComponent,
+    CardSkeletonComponent
   ],
   imports: [
+    SkeletonModule,
     DividerModule,
     ChipModule,
     PasswordModule,
@@ -115,6 +119,7 @@ import { NotfoundpageComponent } from './notfoundpage/notfoundpage.component';
     AccordionModule,
   ],
   exports:[
+    SkeletonModule,
     DividerModule,
     ChipModule,
     PasswordModule,

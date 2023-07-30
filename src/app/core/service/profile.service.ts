@@ -16,4 +16,10 @@ getProfileDetailithId(id){
     catchError(this.global.handleError)
   )
 }
+fnUpdateUser(user,id){
+  return this.http.put(this.profileUrl+'update:'+id,user).pipe(
+    map((x)=>{return x})
+    ,catchError(this.global.handleError)
+  )
+}
 }
