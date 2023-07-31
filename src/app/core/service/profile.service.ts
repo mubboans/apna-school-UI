@@ -22,4 +22,14 @@ fnUpdateUser(user,id){
     ,catchError(this.global.handleError)
   )
 }
+fngetStudentdetail(id){
+  return this.http.get(this.profileUrl+'studentdetail/get:'+id).pipe(
+    map((x)=>{return x}),catchError(this.global.handleError)
+   ) 
+}
+fngetTeacherDetails(id){
+   return this.http.get(this.profileUrl+'teacherdetail/get:'+id).pipe(
+    map((x)=>{return x}),catchError(this.global.handleError)
+   ) 
+}
 }

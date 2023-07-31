@@ -46,6 +46,12 @@
             <p-button label="Save changed" icon="pi pi-upload" styleClass="p-button-warning"></p-button>
         </div>
     </p-toolbar>
+    <div class="formgrid grid" *ngIf="userprofileData;else skeleton">
+        <div class="field col-12 md:col-6">
+            <label for="firstname6">Name</label>
+            <input id="firstname6" [(ngModel)]="userprofileData.name" type="text" class="text-base text-color surface-overlay p-2 border-1 border-solid surface-border border-round appearance-none outline-none focus:border-primary w-full">
+        </div>
+        </div>
 </div>
 <ng-template #skeleton> 
     <app-card-skeleton></app-card-skeleton>

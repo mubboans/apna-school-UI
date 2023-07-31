@@ -1,6 +1,6 @@
 import { DatePipe } from '@angular/common';
 import { Component, OnInit } from '@angular/core';
-import { User } from 'src/app/core/models/user.model';
+import { StudentDetails, User, teacherDetail } from 'src/app/core/models/user.model';
 import { GlobalService } from 'src/app/core/service/global.service';
 import { ProfileService } from 'src/app/core/service/profile.service';
 
@@ -12,6 +12,8 @@ import { ProfileService } from 'src/app/core/service/profile.service';
 export class EditProfileComponent implements OnInit {
   user:User;
   userprofileData:User;
+  studentDetails:StudentDetails;
+  teacherDetails:teacherDetail;
   constructor(public global:GlobalService,public profile:ProfileService) { }
 
   ngOnInit(): void {
@@ -27,6 +29,12 @@ export class EditProfileComponent implements OnInit {
     }
     
   })
+ }
+ getTeacherDetails() {
+
+ }
+ getStudentDetails() {
+  
  }
  UpdateUserprofile(){
   this.profile.fnUpdateUser(this.userprofileData,this.userprofileData._id).subscribe((x:any) => {
