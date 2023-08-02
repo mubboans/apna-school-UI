@@ -17,7 +17,7 @@ export class User{
     _id?:string;
     creationDate?:any;
     } 
- class Particular{
+ export class Particular{
         from?:Date;
         to?: Date;
         name?: string;
@@ -26,20 +26,20 @@ export class User{
         mediumInstruction?:string;
         reason?:string;
     } 
- class EmergencyDetail {
+ export class EmergencyDetail {
         name?:string;
         address?:string;
         contact?:Number;
         email?:string;
     }
-    class addressSchema{
+    export class addressSchema{
         street?: string;
     city?: string;
     state?: string;
     postalCode?: string;
     country?: string;
     }
-    class FamilyDetail{
+    export class FamilyDetail{
         name?:string;
         age?:Number;
         qualification?: string;
@@ -50,7 +50,7 @@ export class User{
     export class StudentDetails{
         user_ID?: string;
         user_data?:any;
-        ageon31stMayL?:Number;
+        ageon331stMayL?:Number;
         placeofbirth?:string;
         nationality?:string;
         mothertongue?:string;

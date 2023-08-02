@@ -10,18 +10,18 @@
         </div>
     </p-toolbar>
   
-    <div class="formgrid grid" *ngIf="userprofileData;else skeleton">
+    <div class="formgrid grid" *ngIf="userprofileDataform;else skeleton">
         <div class="field col-12 md:col-6">
             <label for="firstname6">Name</label>
-            <input id="firstname6" [(ngModel)]="userprofileData.name" type="text" class="text-base text-color surface-overlay p-2 border-1 border-solid surface-border border-round appearance-none outline-none focus:border-primary w-full">
+            <input id="firstname6" [(ngModel)]="userprofileDataform.name" type="text" class="text-base text-color surface-overlay p-2 border-1 border-solid surface-border border-round appearance-none outline-none focus:border-primary w-full">
         </div>
         <div class="field col-12 md:col-6">
             <label for="lastname6">Contact</label>
-            <input id="lastname6" [(ngModel)]="userprofileData.contact" type="text" class="text-base text-color surface-overlay p-2 border-1 border-solid surface-border border-round appearance-none outline-none focus:border-primary w-full">
+            <input id="lastname6" [(ngModel)]="userprofileDataform.contact" type="text" class="text-base text-color surface-overlay p-2 border-1 border-solid surface-border border-round appearance-none outline-none focus:border-primary w-full">
         </div>
         <div class="field col-12 md:col-4">
             <label for="lastname6">Email</label>
-            <input id="lastname6" [(ngModel)]="userprofileData.email" type="text" class="text-base text-color surface-overlay p-2 border-1 border-solid surface-border border-round appearance-none outline-none focus:border-primary w-full">
+            <input id="lastname6" [(ngModel)]="userprofileDataform.email" type="text" class="text-base text-color surface-overlay p-2 border-1 border-solid surface-border border-round appearance-none outline-none focus:border-primary w-full">
         </div>
         <!-- <div class="field col-12">
             <label for="address">Address</label>
@@ -29,12 +29,12 @@
         </div> -->
         <div class="field col-12 md:col-3">
             <label for="city">Created On</label> <br>
-            <p-chip label="{{userprofileData.createdAt | date:'yyyy-MM-dd'}}" class="text-base text-color surface-overlay p-2  appearance-none outline-none focus:border-primary w-full"></p-chip>
-            <!-- <input id="lastname6"  [(ngModel)]="userprofileData.createdAt" type="text" class="text-base text-color surface-overlay p-2 border-1 border-solid surface-border border-round appearance-none outline-none focus:border-primary w-full"> -->
+            <p-chip label="{{userprofileDataform.createdAt | date:'yyyy-MM-dd'}}" class="text-base text-color surface-overlay p-2  appearance-none outline-none focus:border-primary w-full"></p-chip>
+            <!-- <input id="lastname6"  [(ngModel)]="userprofileDataformformform.createdAt" type="text" class="text-base text-color surface-overlay p-2 border-1 border-solid surface-border border-round appearance-none outline-none focus:border-primary w-full"> -->
         </div>
         <div class="field col-12 md:col-5">
             <label for="city">Password</label>
-            <p-password [disabled]="true" [(ngModel)]="userprofileData.password" [toggleMask]="true" [feedback]="false" [style]="{'width':'100%','margin-bottom':'10px'}"></p-password>
+            <p-password [disabled]="true" [(ngModel)]="userprofileDataform.password" [toggleMask]="true" [feedback]="false" [style]="{'width':'100%','margin-bottom':'10px'}"></p-password>
         </div>
     </div>
    
@@ -46,10 +46,89 @@
             <p-button label="Save changed" icon="pi pi-upload" styleClass="p-button-warning"></p-button>
         </div>
     </p-toolbar>
-    <div class="formgrid grid" *ngIf="userprofileData;else skeleton">
+    <div class="formgrid grid align-item-center justify-content-center">
+        <!-- *ngIf="studentDetailsform;else skeleton" -->
+        <div class="field col-12 md:col-4">
+            <label for="firstname6">Age on 31st May</label>
+            <input id="firstname6" [(ngModel)]="studentDetailsform.ageon331stMayL" type="number" class="text-base text-color surface-overlay p-2 border-1 border-solid surface-border border-round appearance-none outline-none focus:border-primary w-full">
+        </div>
+        <div class="field col-12 md:col-4">
+            <label for="firstname6">Place of Birth</label>
+            <input id="firstname6" [(ngModel)]="studentDetailsform.placeofbirth" type="number" class="text-base text-color surface-overlay p-2 border-1 border-solid surface-border border-round appearance-none outline-none focus:border-primary w-full">
+        </div>
+
+        <div class="field col-12 md:col-4">
+            <label for="firstname6">Nationality</label>
+            <input id="firstname6" [(ngModel)]="studentDetailsform.nationality" type="number" class="text-base text-color surface-overlay p-2 border-1 border-solid surface-border border-round appearance-none outline-none focus:border-primary w-full">
+        </div>
         <div class="field col-12 md:col-6">
-            <label for="firstname6">Name</label>
-            <input id="firstname6" [(ngModel)]="userprofileData.name" type="text" class="text-base text-color surface-overlay p-2 border-1 border-solid surface-border border-round appearance-none outline-none focus:border-primary w-full">
+            <label for="firstname6">Mother Tongue</label>
+            <input id="firstname6" [(ngModel)]="studentDetailsform.mothertongue" type="number" class="text-base text-color surface-overlay p-2 border-1 border-solid surface-border border-round appearance-none outline-none focus:border-primary w-full">
+        </div>
+        <div class="field col-12 md:col-6">
+            <label for="firstname6">Any Medical Illeness</label>
+            <input id="firstname6" [(ngModel)]="studentDetailsform.medicalIlleness" type="number" class="text-base text-color surface-overlay p-2 border-1 border-solid surface-border border-round appearance-none outline-none focus:border-primary w-full">
+        </div>
+        <!-- <h4 class="text-center">Particulars </h4> -->
+        <div class="field col-12 md:col-10">
+            <label for="firstname6">Particular of last school</label>
+            <div class="formgrid grid">  
+           
+
+                <div class="field col-12 md:col-6">
+                    <label for="firstname6">From</label>
+                    <input id="firstname6" [(ngModel)]="studentDetailsform.particulars.from" type="date" class="text-base text-color surface-overlay p-2 border-1 border-solid surface-border border-round appearance-none outline-none focus:border-primary w-full">
+                </div>
+                <div class="field col-12 md:col-6">
+                    <label for="firstname6">To</label>
+                    <input id="firstname6" [(ngModel)]="studentDetailsform.particulars.to" type="date" class="text-base text-color surface-overlay p-2 border-1 border-solid surface-border border-round appearance-none outline-none focus:border-primary w-full">
+                </div>     
+            <div class="field col-12 md:col-6">
+                <label for="firstname6">Name</label>
+                <input id="firstname6" [(ngModel)]="studentDetailsform.particulars.name" type="text" class="text-base text-color surface-overlay p-2 border-1 border-solid surface-border border-round appearance-none outline-none focus:border-primary w-full">
+            </div> 
+            <div class="field col-12 md:col-6">
+                <label for="firstname6">Address</label>
+                <input id="firstname6" [(ngModel)]="studentDetailsform.particulars.address" type="text" class="text-base text-color surface-overlay p-2 border-1 border-solid surface-border border-round appearance-none outline-none focus:border-primary w-full">
+            </div> 
+            <div class="field col-12 md:col-6">
+                <label for="firstname6">Last Class</label>
+                <input id="firstname6" [(ngModel)]="studentDetailsform.particulars.lastclass" type="text" class="text-base text-color surface-overlay p-2 border-1 border-solid surface-border border-round appearance-none outline-none focus:border-primary w-full">
+            </div> 
+            <div class="field col-12 md:col-6">
+                <label for="firstname6">Medium of Instruction</label>
+                <input id="firstname6" [(ngModel)]="studentDetailsform.particulars.mediumInstruction" type="text" class="text-base text-color surface-overlay p-2 border-1 border-solid surface-border border-round appearance-none outline-none focus:border-primary w-full">
+            </div>
+
+            <div class="field col-12 md:col-6">
+                <label for="firstname6">Reason for change of school</label>
+                <input id="firstname6" [(ngModel)]="studentDetailsform.particulars.reason" type="text" class="text-base text-color surface-overlay p-2 border-1 border-solid surface-border border-round appearance-none outline-none focus:border-primary w-full">
+            </div>
+
+            </div>
+        </div>
+
+        
+
+        <div class="field col-12 md:col-6">
+            <label for="firstname6">Age on 31st May</label>
+            <input id="firstname6" [(ngModel)]="studentDetailsform.ageon331stMayL" type="number" class="text-base text-color surface-overlay p-2 border-1 border-solid surface-border border-round appearance-none outline-none focus:border-primary w-full">
+        </div>
+        <div class="field col-12 md:col-6">
+            <label for="firstname6">Age on 31st May</label>
+            <input id="firstname6" [(ngModel)]="studentDetailsform.ageon331stMayL" type="number" class="text-base text-color surface-overlay p-2 border-1 border-solid surface-border border-round appearance-none outline-none focus:border-primary w-full">
+        </div>
+        <div class="field col-12 md:col-6">
+            <label for="firstname6">Age on 31st May</label>
+            <input id="firstname6" [(ngModel)]="studentDetailsform.ageon331stMayL" type="number" class="text-base text-color surface-overlay p-2 border-1 border-solid surface-border border-round appearance-none outline-none focus:border-primary w-full">
+        </div>
+        <div class="field col-12 md:col-6">
+            <label for="firstname6">Age on 31st May</label>
+            <input id="firstname6" [(ngModel)]="studentDetailsform.ageon331stMayL" type="number" class="text-base text-color surface-overlay p-2 border-1 border-solid surface-border border-round appearance-none outline-none focus:border-primary w-full">
+        </div>
+        <div class="field col-12 md:col-6">
+            <label for="firstname6">Age on 31st May</label>
+            <input id="firstname6" [(ngModel)]="studentDetailsform.ageon331stMayL" type="number" class="text-base text-color surface-overlay p-2 border-1 border-solid surface-border border-round appearance-none outline-none focus:border-primary w-full">
         </div>
         </div>
 </div>

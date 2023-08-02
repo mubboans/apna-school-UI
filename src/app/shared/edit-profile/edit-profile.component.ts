@@ -1,6 +1,6 @@
 import { DatePipe } from '@angular/common';
 import { Component, OnInit } from '@angular/core';
-import { StudentDetails, User, teacherDetail } from 'src/app/core/models/user.model';
+import { Particular, StudentDetails, User, teacherDetail } from 'src/app/core/models/user.model';
 import { GlobalService } from 'src/app/core/service/global.service';
 import { ProfileService } from 'src/app/core/service/profile.service';
 
@@ -11,33 +11,51 @@ import { ProfileService } from 'src/app/core/service/profile.service';
 })
 export class EditProfileComponent implements OnInit {
   user:User;
-  userprofileData:User;
-  studentDetails:StudentDetails;
-  teacherDetails:teacherDetail;
+  userprofileDataform:User;
+  studentDetailsform:StudentDetails=new StudentDetails;
+  teacherDetailsform:teacherDetail=new teacherDetail;
+  
   constructor(public global:GlobalService,public profile:ProfileService) { }
 
   ngOnInit(): void {
+    this.studentDetailsform.particulars = new Particular;
     this.user = this.global.user;
     this.getUserDetails()
+    if(this.user && this.user.role =='student') {
+      console.log('student');
+      this.getStudentDetails();      
+    }
+    else if(this.user && (this.user.role =='teacher' ||
+     this.user.role =='staff')){
+      console.log('teacher');
+      this.getTeacherDetails();
+    }
   }
  getUserDetails() {
   this.profile.getProfileDetailithId(this.user.id).subscribe((x:any)=>{
     if(x.success) {
-      this.userprofileData = x.data;
+      this.userprofileDataform = x.data;
       // this.userprofileData.creationDate =this.datePipe.transform(this.userprofileData.createdAt, 'yyyy-MM-dd')
-      console.log(this.userprofileData,'user profiile');
+      console.log(this.userprofileDataform,'user profiile');
     }
     
   })
  }
  getTeacherDetails() {
-
+this.profile.fngetTeacherDetails(this.userprofileDataform.userDetailId)
+.subscribe((x:any)=>{
+  console.log(x);
+})
  }
  getStudentDetails() {
-  
+  this.profile.fngetStudentdetail(this.userprofileDataform.userDetailId)
+.subscribe((x:any)=>{
+  console.log(x);
+})
  }
  UpdateUserprofile(){
-  this.profile.fnUpdateUser(this.userprofileData,this.userprofileData._id).subscribe((x:any) => {
+  this.profile.fnUpdateUser(this.userprofileDataform,this.userprofileDataform._id)
+  .subscribe((x:any) => {
       if(x.success){
         this.global.showToast('success',x.message,x.status);
       }
