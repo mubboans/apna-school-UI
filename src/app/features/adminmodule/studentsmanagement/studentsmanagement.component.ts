@@ -23,6 +23,7 @@ export class StudentsmanagementComponent implements OnInit {
   constructor(public global:GlobalService,public profile:ProfileService) { }
   
   ngOnInit(): void {
+    this.getUser()
   }
   openNew() {
     this.studentuserObj = {};
@@ -34,13 +35,26 @@ deleteSelectedProducts() {
     message: 'Are you sure you want to delete the selected products?',
     header: 'Confirm',
     icon: 'pi pi-exclamation-triangle',
-    callback: () =>{
-      this.profile.fnBulkDelete(this.selectedStudents).subscribe((x:any)=>{
-          return x;
-      })
-    }
+    deletefn:() => {
+      this.profile.fnBulkDelete(obj.ids).subscribe((x:any)=>{
+        if(x.success){
+        this.global.showToast('success','Successful',x.message)
+        }
+   })
+    },
+    ids:this.selectedStudents
   }
-  this.global.showConfirmationToast(obj)
+
+  this.global.showConfirmationToastforUserDelete(obj)
+  this.selectedStudents = null;
 }
-  
+  getUser(){
+    this.profile.fnGetAllUser().subscribe((users:any)=>{
+      this.studentUsers = users.data;
+      const d = users.data.map((x:any)=>{console.log(x.role,'map',);
+       x.role == 'student'});
+      console.log(d);
+
+    })
+  }
 }

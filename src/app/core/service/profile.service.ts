@@ -37,4 +37,9 @@ fnBulkDelete(ids){
     map((x)=>{return x}),catchError(this.global.handleError)
   )
 }
+fnGetAllUser(){
+  return this.http.get(this.profileUrl+'all').pipe(
+    map((x)=>{return x}),catchError(this.global.handleError)
+  )
+}
 }

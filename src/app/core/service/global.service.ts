@@ -4,6 +4,7 @@ import { BehaviorSubject, Observable, throwError } from 'rxjs';
 import { User } from '../models/user.model';
 import { LocalStorageDataService } from './local-storage-data.service';
 import { ConfirmationService, MessageService } from 'primeng/api';
+import { ProfileService } from './profile.service';
 
 @Injectable({
   providedIn: 'root'
@@ -11,7 +12,8 @@ import { ConfirmationService, MessageService } from 'primeng/api';
 export class GlobalService {
   showSideBar:BehaviorSubject<boolean>= new BehaviorSubject<boolean>(false); 
   user:User = this.local.getUserLocalData();
-  constructor(public local:LocalStorageDataService,public messageService: MessageService,public confirmationService: ConfirmationService)
+  constructor(public local:LocalStorageDataService,
+    public messageService: MessageService,public confirmationService: ConfirmationService)
    { }
   showSidebar(){
     this.showSideBar.next(true);
@@ -25,17 +27,15 @@ export class GlobalService {
   showToast(severity,summary,detail){
    return  this.messageService.add({severity:severity, summary:summary, detail:detail,life:2000}); 
   }
-  showConfirmationToast(obj){
+  showConfirmationToastforUserDelete(obj){
     return    this.confirmationService.confirm({
       message:obj.message,
       header:obj.header,
       icon: obj.icon,
-      accept: () => {
-          obj.callback();
-          // this.products = this.products.filter(val => !this.selectedProducts.includes(val));
-          // this.selectedProducts = null;
-          this.messageService.add({severity:'success', summary: 'Successful', detail: 'Deleted Selection', life: 2000});
-      }
+      accept: obj.deletefn()
+      // () => {
+        
+      // }
   });
   }
 }

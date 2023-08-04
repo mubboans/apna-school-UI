@@ -1,22 +1,22 @@
-<div class="card">
+<div class="card p-3 px-4">
     <p-toolbar styleClass="p-mb-4">
         <ng-template pTemplate="left">
-            <button pButton pRipple label="New" icon="pi pi-plus" class="p-button-success p-mr-2" (click)="openNew()"></button>
+            <button pButton pRipple label="New" icon="pi pi-plus" class="p-button-success mr-2" (click)="openNew()"></button>
             <button pButton pRipple [label]="Delete" icon="pi pi-trash" class="p-button-danger" (click)="deleteSelectedProducts()" [disabled]="!selectedProducts || !selectedProducts.length"></button>
         </ng-template>
 
         <ng-template pTemplate="right">
-            <p-fileUpload mode="basic" accept="image/*" [maxFileSize]="1000000" label="Import" chooseLabel="Import" class="p-mr-2 p-d-inline-block"></p-fileUpload>
+            <p-fileUpload mode="basic" accept="image/*" [maxFileSize]="1000000" label="Import" chooseLabel="Import" class="mr-2 p-d-inline-block"></p-fileUpload>
             <button pButton pRipple label="Export" icon="pi pi-upload" class="p-button-help"></button>
         </ng-template>
     </p-toolbar>
 
-    <p-table #dt [value]="studentUsers" [rows]="10" [paginator]="true" [globalFilterFields]="['name','country.name','representative.name','status']"
-        [(selection)]="selectedStudents" [rowHover]="true" dataKey="name"
+    <p-table #dt [value]="studentUsers" [rows]="10" [paginator]="true" [globalFilterFields]="['name','email','role','status']"
+        [(selection)]="selectedStudents" [rowHover]="true" dataKey="name" styleClass="p-datatable-responsive-demo"
         currentPageReportTemplate="Showing {first} to {last} of {totalRecords} entries" [showCurrentPageReport]="true">
         <ng-template pTemplate="caption">
             <div class="p-d-flex p-ai-center p-jc-between">
-                <h5 class="p-m-0">Manage Products</h5>
+                <h5 class="p-m-0">Student List</h5>
                 <span class="p-input-icon-left">
                     <i class="pi pi-search"></i>
                     <input pInputText type="text" (input)="dt.filterGlobal($event.target.value, 'contains')" placeholder="Search..." />
@@ -29,10 +29,10 @@
                     <p-tableHeaderCheckbox></p-tableHeaderCheckbox>
                 </th>
                 <th pSortableColumn="name">Name <p-sortIcon field="name"></p-sortIcon></th>
-                <th>Image</th>
-                <th pSortableColumn="price">Price <p-sortIcon field="price"></p-sortIcon></th>
-                <th pSortableColumn="category">Category <p-sortIcon field="category"></p-sortIcon></th>
-                <th pSortableColumn="rating">Reviews <p-sortIcon field="rating"></p-sortIcon></th>
+                <th>Email</th>
+                <th pSortableColumn="price">Contact <p-sortIcon field="price"></p-sortIcon></th>
+                <th pSortableColumn="category">Created On <p-sortIcon field="category"></p-sortIcon></th>
+                <th pSortableColumn="rating">Password <p-sortIcon field="rating"></p-sortIcon></th>
                 <th pSortableColumn="inventoryStatus">Status <p-sortIcon field="inventoryStatus"></p-sortIcon></th>
                 <th></th>
             </tr>
@@ -42,12 +42,16 @@
                 <td>
                     <p-tableCheckbox [value]="product"></p-tableCheckbox>
                 </td>
-                <td>{{product.name}}</td>
-                <td><img [src]="'assets/showcase/images/demo/product/' + product.image" [alt]="product.name" width="100" class="p-shadow-4" /></td>
-                <td>{{product.price | currency:'USD'}}</td>
-                <td>{{product.category}}</td>
-                <td><p-rating [ngModel]="product.rating" [readonly]="true" [cancel]="false"></p-rating></td>
-                <td><span [class]="'product-badge status-' + (product.inventoryStatus ? product.inventoryStatus.toLowerCase() : '')">{{product.inventoryStatus}}</span></td>
+                <td>{{product.name | uppercase}}</td>
+                <td>
+                    {{product.email}}
+                </td>
+                <td>{{product.contact}}</td>
+                <td>{{product.createdAt}}</td>
+                <td>
+                    {{product.password}}  
+                </td>
+                <td><span [class]="'product-badge status-' + (product.inventoryStatus ? product.inventoryStatus.toLowerCase() : '')">{{product.isActive}}</span></td>
                 <td>
                     <button pButton pRipple icon="pi pi-pencil" class="p-button-rounded p-button-success p-mr-2" (click)="editProduct(product)"></button>
                     <button pButton pRipple icon="pi pi-trash" class="p-button-rounded p-button-warning" (click)="deleteProduct(product)"></button>
@@ -56,7 +60,7 @@
         </ng-template>
         <ng-template pTemplate="summary">
             <div class="p-d-flex p-ai-center p-jc-between">
-                In total there are {{products ? products.length : 0 }} products.
+                In total there are {{studentUsers ? studentUsers.length : 0 }} products.
             </div>
         </ng-template>
     </p-table>
