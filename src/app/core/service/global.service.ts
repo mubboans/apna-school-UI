@@ -4,14 +4,13 @@ import { BehaviorSubject, Observable, throwError } from 'rxjs';
 import { User } from '../models/user.model';
 import { LocalStorageDataService } from './local-storage-data.service';
 import { ConfirmationService, MessageService } from 'primeng/api';
-import { ProfileService } from './profile.service';
-
 @Injectable({
   providedIn: 'root'
 })
 export class GlobalService {
   showSideBar:BehaviorSubject<boolean>= new BehaviorSubject<boolean>(false); 
   user:User = this.local.getUserLocalData();
+  showLoader:boolean=true;
   constructor(public local:LocalStorageDataService,
     public messageService: MessageService,public confirmationService: ConfirmationService)
    { }
@@ -32,10 +31,6 @@ export class GlobalService {
       message:obj.message,
       header:obj.header,
       icon: obj.icon,
-      accept: obj.deletefn()
-      // () => {
-        
-      // }
-  });
+      accept: obj.deletefn()  });
   }
 }

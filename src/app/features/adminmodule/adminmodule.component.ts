@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { User } from 'src/app/core/models/user.model';
+import { AdminService } from 'src/app/core/service/admin.service';
 import { LocalStorageDataService } from 'src/app/core/service/local-storage-data.service';
 
 @Component({
@@ -17,7 +18,8 @@ export class AdminmoduleComponent implements OnInit {
   polardata: any;
   linedata:any;
   user:User;
-  constructor(public localData:LocalStorageDataService) { }
+  cardData:any[];
+  constructor(public localData:LocalStorageDataService,public adminSer:AdminService) { }
   
 
   ngOnInit(): void {
@@ -68,6 +70,14 @@ export class AdminmoduleComponent implements OnInit {
    this.tomorrowdate.setDate(this.tomorrowdate.getDate() + 1);
     console.log('today is',this.date,'first day to month'
     ,this.firstDayofMonth,'first day of week',this.getWeekfirstDay,'Tommorow date',this.tomorrowdate);
-  }
 
+    this.getCard();
+  }
+  getCard(){
+    this.adminSer.fnGetCardDetail('2023-07-01','2023-08-01').subscribe((x:any)=>{
+      this.cardData = x.data;
+      console.log(this.cardData,'cardData',Array.isArray(this.cardData));
+      
+    })
+  }
 }

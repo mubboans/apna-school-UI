@@ -1,21 +1,25 @@
 <div class="surface-ground px-4 py-3 md:px-6 lg:px-8">
     <div class="grid">
-        <div class="col-12 md:col-6 lg:col-3">
-            <div class="surface-card shadow-2 border-round">
-                <div class="p-3 flex align-items-start"><img
-                        src="../../../assets/images/mail.svg" class="mr-2"
-                        style="width: 32px; height: 32px;">
-                    <div><span class="text-700">Total Student</span>
-                        <div class="text-green-500 text-xl mt-2">+0.53%</div>
-                    </div>
-                    <div
-                        class="p-2 bg-indigo-50 text-indigo-500 border-round ml-auto">0.0045
-                    </div>
-                </div><img src="../../../assets/images/graph-1.svg"
-                    class="w-full">
+        <ng-container *ngFor="let d of cardData;index as i">
+            <div class="col-12 md:col-6 lg:col-3">
+                <div class="surface-card shadow-2 border-round">
+                    <div class="p-3 flex align-items-start">
+                        <img src="../../../assets/images/mail.svg" class="mr-2"
+                            style="width: 32px; height: 32px;">
+                        <div>
+                            <span class="text-700">{{d.role}}</span>
+                            <div class="text-green-500 text-xl mt-2">+0.53%</div>
+                        </div>
+                        <div
+                            class="p-2 bg-indigo-50 text-indigo-500 border-round ml-auto">{{d.count}}
+                        </div>
+                    </div><img src="../../../assets/images/graph-1.svg"
+                        class="w-full">
+                </div>
             </div>
-        </div>
-        <div class="col-12 md:col-6 lg:col-3">
+        </ng-container>
+       
+        <!-- <div class="col-12 md:col-6 lg:col-3">
             <div class="surface-card shadow-2 border-round">
                 <div class="p-3 flex align-items-start"><img
                         src="../../../assets/images/pc.svg" class="mr-2"
@@ -58,7 +62,7 @@
                 </div><img src="../../../assets/images/graph-4.svg"
                     class="w-full">
             </div>
-        </div>
+        </div> -->
     </div>
     <div class="grid mt-3">
         <div class="col-12 lg:col-6">

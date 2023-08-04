@@ -38,11 +38,12 @@ submitted: boolean;
   constructor(public auth:AuthService,private messageService: MessageService,public route:Router,public localStorage:LocalStorageDataService) { }
 
   ngOnInit(): void {
+    this.localStorage.logoutUser();
   }
 fnLogin(){
-
   this.submitted=true
   this.auth.fnLogin(this.identifier,this.password).subscribe((x:any)=>{
+    
     if(x.success){
       let d = x.data;
       console.log(d);

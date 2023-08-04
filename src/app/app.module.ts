@@ -15,6 +15,7 @@ import { SharedModule } from './shared/shared.module';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { ChangePasswordComponent } from './core/auth-component/change-password/change-password.component';
 import { RouterModule } from '@angular/router';
+import { LoaderComponent } from './core/common-component/loader/loader.component';
 @NgModule({
   declarations: [
     AppComponent,
@@ -26,6 +27,7 @@ import { RouterModule } from '@angular/router';
     HeaderComponent,
     FooterComponent,
     ChangePasswordComponent,
+    LoaderComponent,
   ],
   imports: [
     BrowserModule,
