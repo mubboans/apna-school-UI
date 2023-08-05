@@ -44,7 +44,7 @@ export class StudentsmanagementComponent implements OnInit {
   }
 
   openNew() {
-    this.studentuserObj = {};
+    this.studentuserObj = new User;
     this.submitted = false;
     this.studentDialog = true;
 }

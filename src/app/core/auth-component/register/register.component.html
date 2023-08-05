@@ -66,7 +66,8 @@
           </div>
           <div class="w-full ">
             <label for="dateformat" class="block text-900 font-medium mb-2">Date of Birth</label>
-            <input type="date" formControlName="DOB" placeholder="Date of Birth" class="p-inputtext p-component p-element w-full mb-3" >
+            <p-inputMask mask="99/99/9999" formControlName="DOB" placeholder="mm/dd/yyyy" slotChar="mm/dd/yyyy"></p-inputMask>
+            <!-- <input type="date" formControlName="DOB" placeholder="Date of Birth" class="p-inputtext p-component p-element w-full mb-3" > -->
             <!-- <p-calendar  dateFormat="mm-dd-yy" inputId="dateformat"></p-calendar> -->
           </div>
         </div>
