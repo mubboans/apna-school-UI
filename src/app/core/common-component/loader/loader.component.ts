@@ -7,7 +7,7 @@ import { GlobalService } from '../../service/global.service';
   styleUrls: ['./loader.component.scss']
 })
 export class LoaderComponent implements OnInit {
-  display:boolean=true;
+  display:boolean;
   constructor(public global:GlobalService) { }
 
   ngOnInit(): void {

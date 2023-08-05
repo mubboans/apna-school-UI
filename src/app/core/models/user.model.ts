@@ -1,7 +1,7 @@
 export class User{
     id?: string;
     name?:string;
-    dob?:Date;
+    DOB?:Date;
     email?:string;
     role?:string;
     password?:string;
@@ -9,8 +9,8 @@ export class User{
     contact?:string;
     profileImg?:string;
     token?:string;
-    createdAt?:Date; 
-    isActive?:boolean;
+    createdAt?:Date=new Date(); 
+    isActive?:boolean=true;
     isDeleted?:boolean;
     updatedAt?:Date;
     userDetailId?:string;

@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { StudentDetails, User } from 'src/app/core/models/user.model';
+import { AuthService } from 'src/app/core/service/auth.service';
 import { GlobalService } from 'src/app/core/service/global.service';
 import { ProfileService } from 'src/app/core/service/profile.service';
 
@@ -20,15 +21,76 @@ export class StudentsmanagementComponent implements OnInit {
   submitted: boolean;
 
   statuses: any[];
-  constructor(public global:GlobalService,public profile:ProfileService) { }
+  constructor(public global:GlobalService,public profile:ProfileService,public auth:AuthService) { }
   
   ngOnInit(): void {
     this.getUser()
   }
+  freezAccount(id,name){
+    this.profile.fnDeactivateUser(id).subscribe((x:any)=>{
+      if(x.success){
+        this.global.showToast('warn','You have Lock Account '+name,x.status);
+        this.getUser();
+      }
+    })
+  }
+  unLockAccount(id){
+    this.profile.fnActivateUser(id).subscribe((x:any)=>{
+      if(x.success){
+        this.global.showToast('info',x.message,x.status);
+        this.getUser();
+      }
+    })
+  }
+
   openNew() {
     this.studentuserObj = {};
     this.submitted = false;
     this.studentDialog = true;
+}
+deleteAccount(email){
+  const d={
+    email:email
+  }
+  this.profile.fnDeleteWithEmail(d).subscribe((x:any)=>{
+    if(x.success){
+      this.global.showToast('error',x.message,x.status);
+      this.getUser();
+    }
+  })
+}
+editAccount(studentuserObj: User) {
+  console.log(studentuserObj,'edit ')
+  this.studentuserObj = {...studentuserObj};
+  this.studentDialog = true;
+}
+saveProduct() {
+  this.submitted = true;
+
+  if (this.studentuserObj._id) {
+    this.profile.fnUpdateUser(this.studentuserObj,this.studentuserObj._id).subscribe((x:any)=>{
+      if(x.success){
+        this.global.showToast('success',x.message,x.status);
+        this.getUser();
+      }
+    })
+  }
+  else{
+    this.studentuserObj.password = 'test123';
+    this.studentuserObj.confirmpassword = this.studentuserObj.password;
+    this.studentuserObj.role = "student",
+    this.auth.fnRegister(this.studentuserObj).subscribe((x:any)=>{
+      if(x.success){
+        this.global.showToast('success',x.message,x.status);
+        this.getUser();
+      }
+    })
+  }
+  this.studentDialog =false;
+}
+hideDialog(){
+  this.studentDialog = false;
+  this.submitted = false;
 }
 deleteSelectedProducts() {
   let obj ={
@@ -50,10 +112,10 @@ deleteSelectedProducts() {
 }
   getUser(){
     this.profile.fnGetAllUser().subscribe((users:any)=>{
-      this.studentUsers = users.data;
-      const d = users.data.map((x:any)=>{console.log(x.role,'map',);
-       x.role == 'student'});
-      console.log(d);
+      //  = users.data;
+       this.studentUsers = users.data.filter((x:any)=>{console.log(x.role,'map',);
+       return x.role == 'student'});
+      // console.log(d);
 
     })
   }

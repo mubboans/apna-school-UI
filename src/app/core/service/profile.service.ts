@@ -16,6 +16,30 @@ getProfileDetailithId(id){
     catchError(this.global.handleError)
   )
 }
+fnDeactivateUser(id){
+  const d ={
+    id:id
+  }
+  return this.http.post(this.profileUrl+'deactivatebyid',d).pipe(
+    map((x)=>{return x}),
+    catchError(this.global.handleError)
+  )
+}
+fnActivateUser(id){
+  const d ={
+    id:id
+  }
+  return this.http.post(this.profileUrl+'activatebyid',d).pipe(
+    map((x)=>{return x}),
+    catchError(this.global.handleError)
+  )
+}
+fnDeleteWithEmail(email){
+  return this.http.post(this.profileUrl+'deletewithemail',email).pipe(
+    map((x)=>{return x}),
+    catchError(this.global.handleError)
+  )
+}
 fnUpdateUser(user,id){
   return this.http.put(this.profileUrl+'update:'+id,user).pipe(
     map((x)=>{return x})

@@ -10,7 +10,7 @@ import { ConfirmationService, MessageService } from 'primeng/api';
 export class GlobalService {
   showSideBar:BehaviorSubject<boolean>= new BehaviorSubject<boolean>(false); 
   user:User = this.local.getUserLocalData();
-  showLoader:boolean=true;
+  showLoader:boolean;
   constructor(public local:LocalStorageDataService,
     public messageService: MessageService,public confirmationService: ConfirmationService)
    { }
