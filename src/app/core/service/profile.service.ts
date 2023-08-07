@@ -56,8 +56,11 @@ fngetTeacherDetails(id){
     map((x)=>{return x}),catchError(this.global.handleError)
    ) 
 }
-fnBulkDelete(ids){
-  return this.http.delete(this.profileUrl+'bulkdelete',ids).pipe(
+fnBulkDelete(id){
+  let data ={
+    ids:id
+  }
+  return this.http.post(this.profileUrl+'bulkdelete',data).pipe(
     map((x)=>{return x}),catchError(this.global.handleError)
   )
 }

@@ -26,11 +26,14 @@ export class GlobalService {
   showToast(severity,summary,detail){
    return  this.messageService.add({severity:severity, summary:summary, detail:detail,life:2000}); 
   }
+  showErrorToast(summary,detail){
+    return  this.messageService.add({severity:'error', summary:summary, detail:detail,life:5000}); 
+  }
   showConfirmationToastforUserDelete(obj){
     return    this.confirmationService.confirm({
       message:obj.message,
       header:obj.header,
       icon: obj.icon,
-      accept: obj.deletefn()  });
+      accept:()=>{obj.deletefn()}});
   }
 }

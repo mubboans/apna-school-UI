@@ -31,11 +31,8 @@ fnRegister(data){
       let d = x.data;
       this.global.user = x.data;
       console.log(d);
-      this.messageService.add({severity:'success', summary:'Verify User', detail:'Successfull Login',life:2000});
-      // setTimeout(()=>{
-        this.localStorage.setUserLocalData(x.data);
-        this.localStorage.setToken(d.token)
-     
+      this.messageService.add({severity:'success', summary:x.message, detail:x.status,life:2000});
+      // setTimeout(()=>{     
       // },1000) 
     }
     return x;

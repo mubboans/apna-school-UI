@@ -2,12 +2,12 @@
     <p-toolbar styleClass="mb-4">
         <ng-template pTemplate="left">
             <button pButton pRipple label="New" icon="pi pi-plus" class="p-button-success mr-2" (click)="openNew()"></button>
-            <button pButton pRipple [label]="Delete" icon="pi pi-trash" class="p-button-danger" (click)="deleteSelectedProducts()" [disabled]="!selectedProducts || !selectedProducts.length"></button>
+            <button pButton pRipple [label]="Delete" icon="pi pi-trash" pTooltip="Bulk Delete" tooltipPosition="bottom" class="p-button-danger mr-2" (click)="deleteSelectedAccount()" [disabled]="!selectedStudents || !selectedStudents.length"></button>
         </ng-template>
 
         <ng-template pTemplate="right">
-            <p-fileUpload mode="basic" accept="image/*" [maxFileSize]="1000000" label="Import" chooseLabel="Import" class="mr-2 p-d-inline-block"></p-fileUpload>
-            <button pButton pRipple label="Export" icon="pi pi-upload" class="p-button-help"></button>
+            <p-fileUpload mode="basic" accept=".xlsx, .xls, .csv" [maxFileSize]="1000000" label="Import" chooseLabel="Import" class="mr-2 p-d-inline-block"></p-fileUpload>
+            <button pButton pRipple label="Export to xlsx" (click)="exportExcel()" icon="pi pi-file-excel" class="p-button-success" pTooltip="Export Data to XLS" tooltipPosition="bottom"></button>
         </ng-template>
     </p-toolbar>
 
@@ -91,9 +91,10 @@
 <p-dialog [(visible)]="studentDialog"[breakpoints]="{'960px': '75vw', '640px': '100vw'}" [modal]="true" [style]="{width: '50vw'}" header="Account Details" styleClass="p-fluid">
     <ng-template pTemplate="content">
         <div class="p-field mb-3 p-2">
+        </div>
+        <div class="p-field mb-3 p-2">
             <label for="name">Name</label>
             <input type="text" pInputText id="name" [(ngModel)]="studentuserObj.name" required autofocus />
-            <small class="p-error" *ngIf="submitted && !product.name">Name is required.</small>
         </div>
         <!-- <div class="p-field">
             <label for="description">Password</label>
@@ -106,12 +107,12 @@
 
         <div class="p-field mb-3 p-2">
             <label class="p-mb-3">Contact</label>
-            <input type="text" pInputText id="name" [(ngModel)]="studentuserObj.contact" required autofocus />
+            <input type="text" pInputText id="name" maxlength="10" [(ngModel)]="studentuserObj.contact" required autofocus />
         </div>
 
         <div class="p-field mb-3 p-2">
             <label class="p-mb-3">Date of Birth</label>
-            <p-inputMask mask="99/99/9999" [(ngModel)]="studentuserObj.DOB" placeholder="mm/dd/yyyy" slotChar="mm/dd/yyyy"></p-inputMask>
+            <p-inputMask mask="9999/99/99" [(ngModel)]="studentuserObj.DOB" placeholder="1980-now/1-12/0-30" slotChar="yyyy/mm/dd"></p-inputMask>
             <!-- <input type="text" pInputText id="name" [(ngModel)]="studentuserObj.DOB" mask="99/99/9999" required autofocus /> -->
         </div>
         
@@ -128,7 +129,7 @@
                 <!-- <p-inputNumber id="quantity" [disabled]="true" [(ngModel)]="studentuserObj.isActive"></p-inputNumber> -->
             </div>
         </div>
-        <h3 class="text-center"> Password is set to test123</h3>
+        <h3 class="text-center"> Password is set to {{studentuserObj.password}} </h3>
     </ng-template>
 
     <ng-template pTemplate="footer">

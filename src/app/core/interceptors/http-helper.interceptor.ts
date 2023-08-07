@@ -30,7 +30,8 @@ export class HttpHelperInterceptor implements HttpInterceptor {
     catchError((error)=>{
       // if(error instanceof HttpErrorResponse && error.status == 401 && (!request.url.includes('login'))|| !request.url.includes('register')  ){
         if(error instanceof HttpErrorResponse && error.status){
-          this.global.showToast('error',error.error.message,error.error.status)
+
+          this.global.showErrorToast(error.error.error,error.error.status)
         // this.mess.add({severity:'error', summary:error.error.message, detail:error.error.status,life:2000});    
       }
       return throwError(error); 

@@ -6,6 +6,19 @@
 
 @media screen and (max-width: 40rem) {
     :host ::ng-deep {
+        .p-toolbar, .p-toolbar-group-left, .p-toolbar-group-right {
+            align-items: center;
+            display: flex;
+            justify-content: flex-start;
+            flex-direction: row;
+            flex-wrap: nowrap;
+        }
+        .p-button {
+           
+            padding: 0.4rem 0.7rem;
+            font-size: 0.8rem;
+           
+        }
         .p-datatable {
             &.p-datatable-responsive-demo {
                 .p-datatable-thead > tr > th,

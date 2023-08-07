@@ -51,7 +51,12 @@ fnLogin(){
       setTimeout(()=>{
         this.localStorage.setUserLocalData(x.data);
         this.localStorage.setToken(d.token)
-        this.route.navigate(['/dashboard']);
+        if(d.role == 'admin'){
+          this.route.navigate(['/admin']);
+        }
+        else{
+          this.route.navigate(['/general']);
+        }
       },1000) 
     }
   })

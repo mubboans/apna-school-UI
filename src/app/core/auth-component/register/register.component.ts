@@ -3,6 +3,7 @@ import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { User } from '../../models/user.model';
 import { AuthService } from '../../service/auth.service';
 import { Router } from '@angular/router';
+import { LocalStorageDataService } from '../../service/local-storage-data.service';
 
 @Component({
   selector: 'app-register',
@@ -22,7 +23,7 @@ export class RegisterComponent implements OnInit {
   password:string;
   user:User;
   showSubmit:boolean = true;
-  constructor(public fb:FormBuilder,public auth:AuthService,public route:Router) {
+  constructor(public fb:FormBuilder,public auth:AuthService,public route:Router,public localStorage:LocalStorageDataService) {
     this.regForm=fb.group({
       name:fb.control('',Validators.required),
       password:fb.control('',Validators.required),
@@ -64,8 +65,10 @@ registerUser(){
   console.log(this.regForm.value,this.regForm.valid);
   this.auth.fnRegister(this.regForm.value).subscribe((x:any)=>{
       if(x.success){
+        this.localStorage.setUserLocalData(x.data);
+        this.localStorage.setToken(x.data.token)
           if(x.data.role == 'admin'){
-            this.route.navigate(['/admins']);
+            this.route.navigate(['/admin']);
           }
           else{
             this.route.navigate(['/general']);

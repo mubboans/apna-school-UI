@@ -4,7 +4,7 @@ export class User{
     DOB?:Date;
     email?:string;
     role?:string;
-    password?:string;
+    password?:string='test123';
     confirmpassword?:string;
     contact?:string;
     profileImg?:string;

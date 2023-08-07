@@ -3,11 +3,13 @@ import { CommonModule } from '@angular/common';
 
 import { GeneralmoduleRoutingModule } from './generalmodule-routing.module';
 import { GeneralmoduleComponent } from './generalmodule.component';
+import { NoticeManagementComponent } from './notice-management/notice-management.component';
 
 
 @NgModule({
   declarations: [
-    GeneralmoduleComponent
+    GeneralmoduleComponent,
+    NoticeManagementComponent
   ],
   imports: [
     CommonModule,
