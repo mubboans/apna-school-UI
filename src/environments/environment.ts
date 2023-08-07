@@ -4,7 +4,8 @@
 
 export const environment = {
   production: false,
-  localServer:'http://localhost:3000/apna-school/v1/'
+  localServer:'http://localhost:3000/apna-school/v1/',
+  // localServer:'https://apna-school.onrender.com/apna-school/v1/'
 };
 
 /*

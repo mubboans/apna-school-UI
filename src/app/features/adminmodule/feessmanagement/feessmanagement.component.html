@@ -1,1 +1,293 @@
-<p>feessmanagement works!</p>
+<div class="card p-3 px-4">
+    <h5>Custom Headers</h5>
+    <p-tabView styleClass="tabview-custom">
+        <p-tabPanel>
+            <ng-template pTemplate="header">
+                <i class="pi pi-calendar mr-2"></i>
+                <span>Fees Structure</span>
+            </ng-template>
+
+            <div class="card p-3 px-4">
+                <p-toolbar styleClass="mb-4">
+                    <ng-template pTemplate="left">
+                        <button pButton pRipple label="New" icon="pi pi-plus" class="p-button-success mr-2"
+                            (click)="openNew()"></button>
+                        <!-- <button pButton pRipple [label]="Delete" icon="pi pi-trash" pTooltip="Bulk Delete" tooltipPosition="bottom" class="p-button-danger mr-2" (click)="deleteSelectedAccount()" [disabled]="!selectedFeesstructure || !selectedFeesstructure.length"></button> -->
+                    </ng-template>
+
+                    <ng-template pTemplate="right">
+                        <!-- <p-fileUpload mode="basic" accept=".xlsx, .xls, .csv" [maxFileSize]="1000000" label="Import" chooseLabel="Import" class="mr-2 p-d-inline-block"></p-fileUpload> -->
+                        <button pButton pRipple label="Export to xlsx" (click)="exportExcel()" icon="pi pi-file-excel"
+                            class="p-button-success" pTooltip="Export Fees Structure to XLS" tooltipPosition="bottom"></button>
+                    </ng-template>
+                </p-toolbar>
+
+                <p-table #dt [value]="feesStructureArray" [rows]="10" [paginator]="true"
+                    [globalFilterFields]="['name','email','role','status']" [(selection)]="selectedFeesstructure"
+                    [rowHover]="true" dataKey="name" styleClass="p-datatable-responsive-demo"
+                    currentPageReportTemplate="Showing {first} to {last} of {totalRecords} entries"
+                    [showCurrentPageReport]="true">
+                    <ng-template pTemplate="caption">
+                        <div class="grid">
+                            <div class="col-12 md:col-6 text-start">
+                                <h3 class="p-m-0">Fees Structure</h3>
+                            </div>
+                            <div class="col-12 md:col-6 text-right">
+                                <span class="p-input-icon-left">
+                                    <i class="pi pi-search"></i>
+                                    <input pInputText type="text"
+                                        (input)="dt.filterGlobal($event.target.value, 'contains')"
+                                        placeholder="Search..." />
+                                </span>
+                            </div>
+                        </div>
+
+                    </ng-template>
+                    <ng-template pTemplate="header">
+                        <tr>
+                            <!-- <th style="width: 3rem">
+                                <p-tableHeaderCheckbox></p-tableHeaderCheckbox>
+                            </th> -->
+                            <th pSortableColumn="className">Class Name <p-sortIcon field="className"></p-sortIcon>
+                            </th>
+                            <th>Tution Fees</th>
+                            <th pSortableColumn="examinationFee">Exam Fees <p-sortIcon field="examinationFee">
+                                </p-sortIcon>
+                            </th>
+                            <th pSortableColumn="additionalFees">Additional Fees <p-sortIcon field="additionalFees">
+                                </p-sortIcon>
+                            </th>
+                            <!-- <th pSortableColumn="rating">Password <p-sortIcon field="rating"></p-sortIcon></th> -->
+                            <th pSortableColumn="inventoryStatus">Other Fees <p-sortIcon field="inventoryStatus">
+                                </p-sortIcon>
+                            </th>
+                            <th>Action</th>
+                        </tr>
+                    </ng-template>
+                    <ng-template pTemplate="body" let-product>
+                        <tr>
+
+                            <td>{{product.className | uppercase}}</td>
+                            <td>
+                                {{product.tuitionFee}}
+                            </td>
+                            <td>{{product.examinationFee}}</td>
+                            <td>{{product.additionalFees}}</td>
+                            <td>{{product.otherFees}}
+                            <td>
+                                <button pButton pRipple icon="pi pi-pencil" pTooltip="Edit" tooltipPosition="bottom"
+                                    class="p-button-rounded p-button-success mr-2"
+                                    (click)="editFeesStructure(product)"></button>
+                                <button pButton pRipple icon="pi pi-trash" pTooltip="Delete" tooltipPosition="bottom"
+                                    class="p-button-rounded p-button-warning"
+                                    (click)="deleteFeesStructure(product._id)"></button>
+
+                            </td>
+                        </tr>
+                    </ng-template>
+                    <ng-template pTemplate="summary">
+                        <div class="p-d-flex p-ai-center p-jc-between">
+                            In total there are {{feesStructureArray ? feesStructureArray.length : 0 }} products.
+                        </div>
+                    </ng-template>
+                </p-table>
+            </div>
+
+            <p-dialog [(visible)]="feesStructureDialog" [breakpoints]="{'960px': '75vw', '640px': '100vw'}"
+                [modal]="true" [style]="{width: '50vw'}" header="Account Details" styleClass="p-fluid">
+                <ng-template pTemplate="content">
+                    <div class="p-field mb-3 p-2">
+                    </div>
+                    <div class="p-field mb-3 p-2">
+                        <label for="name">Class Name</label>
+                        <input type="text" pInputText id="name" [(ngModel)]="feesStructureObj.className" required
+                            autofocus />
+                    </div>
+                    <!-- <div class="p-field">
+                        <label for="description">Password</label>
+                        <input type="text" pInputText id="name" [(ngModel)]="studentuserObj.password" required autofocus />
+                    </div> -->
+                    <div class="p-field mb-3 p-2">
+                        <label for="inventoryStatus">Tution Fee</label>
+                        <input type="text" pInputText id="name" [(ngModel)]="feesStructureObj.tuitionFee" required
+                            autofocus />
+                    </div>
+
+                    <!-- <div class="p-field mb-3 p-2">
+                        <label class="p-mb-3">Contact</label>
+                        <input type="number" pInputText id="name" [(ngModel)]="feesStructureObj.contact" required autofocus />
+                    </div> -->
+
+                    <div class="p-field mb-3 p-2">
+                        <label class="p-mb-3">Examination Fee</label>
+                        <input type="number" pInputText id="name" [(ngModel)]="feesStructureObj.examinationFee" required
+                            autofocus />
+                        <!-- <p-inputMask mask="9999/99/99" [(ngModel)]="studentuserObj.examinationFee" placeholder="1980-now/1-12/0-30" slotChar="yyyy/mm/dd"></p-inputMask> -->
+                        <!-- <input type="text" pInputText id="name" [(ngModel)]="studentuserObj.DOB" mask="99/99/9999" required autofocus /> -->
+                    </div>
+
+                    <div class="p-field p-col mb-3">
+                        <label for="price">Additional Fees</label>
+                        <input type="number" pInputText id="name" [(ngModel)]="feesStructureObj.additionalFees" required
+                            autofocus />
+                        <!-- <p-inputNumber id="price" [disabled]="true" [(ngModel)]="studentuserObj.createdAt" mode="currency" currency="USD" locale="en-US"></p-inputNumber> -->
+                    </div>
+                    <div class="p-field p-col">
+                        <label for="quantity">Other Fees</label>
+                        <input type="text" pInputText id="name" [(ngModel)]="feesStructureObj.otherFees" required
+                            autofocus />
+                        <!-- <p-inputNumber id="quantity" [disabled]="true" [(ngModel)]="studentuserObj.isActive"></p-inputNumber> -->
+                    </div>
+
+                    <!-- <h3 class="text-center"> Password is set to {{studentuserObj.password}} </h3> -->
+                </ng-template>
+
+                <ng-template pTemplate="footer">
+                    <button pButton pRipple label="Cancel" icon="pi pi-times" class="p-button-text"
+                        (click)="hideDialog()"></button>
+                    <button pButton pRipple label="Save" icon="pi pi-check" class="p-button-text"
+                        (click)="saveProductStructure()"></button>
+                </ng-template>
+            </p-dialog>
+
+        </p-tabPanel>
+    
+        <p-tabPanel header="Add Fees Payment">
+            <ng-template pTemplate="header">
+                <i class="pi pi-user mr-2"></i>
+                <span>Fees Payment</span>
+            </ng-template>
+            <div class="card p-3 px-4">
+                <p-toolbar styleClass="mb-4">
+                    <ng-template pTemplate="left">
+                        <button pButton pRipple label="New" icon="pi pi-plus" class="p-button-success mr-2"
+                            (click)="openNewPayment()"></button>
+                        <!-- <button pButton pRipple [label]="Delete" icon="pi pi-trash" pTooltip="Bulk Delete" tooltipPosition="bottom" class="p-button-danger mr-2" (click)="deleteSelectedAccount()" [disabled]="!selectedFeesstructure || !selectedFeesstructure.length"></button> -->
+                    </ng-template>
+
+                    <ng-template pTemplate="right">
+                        <!-- <p-fileUpload mode="basic" accept=".xlsx, .xls, .csv" [maxFileSize]="1000000" label="Import" chooseLabel="Import" class="mr-2 p-d-inline-block"></p-fileUpload> -->
+                        <button pButton pRipple label="Export to xlsx" (click)="exportExcelPayment()" icon="pi pi-file-excel"
+                            class="p-button-success" pTooltip="Export Fees Payment to XLS" tooltipPosition="bottom"></button>
+                    </ng-template>
+                </p-toolbar>
+
+                <p-table #dt [value]="feesPaymenteArray" [rows]="10" [paginator]="true"
+                    [globalFilterFields]="['studentName']" [(selection)]="selectedFeesstructure"
+                    [rowHover]="true" dataKey="name" styleClass="p-datatable-responsive-demo"
+                    currentPageReportTemplate="Showing {first} to {last} of {totalRecords} entries"
+                    [showCurrentPageReport]="true">
+                    <ng-template pTemplate="caption">
+                        <div class="grid">
+                            <div class="col-12 md:col-6 text-start">
+                                <h3 class="p-m-0">Fees Payment</h3>
+                            </div>
+                            <div class="col-12 md:col-6 text-right">
+                                <span class="p-input-icon-left">
+                                    <i class="pi pi-search"></i>
+                                    <input pInputText type="text"
+                                        (input)="dt.filterGlobal($event.target.value, 'contains')"
+                                        placeholder="Search..." />
+                                </span>
+                            </div>
+                        </div>
+
+                    </ng-template>
+                    <ng-template pTemplate="header">
+                        <tr>
+                            <!-- <th style="width: 3rem">
+                                <p-tableHeaderCheckbox></p-tableHeaderCheckbox>
+                            </th> -->
+                            <th pSortableColumn="className">Student Name <p-sortIcon field="studentName"></p-sortIcon>
+                            </th>
+                            <th pSortableColumn="examinationFee">Reciept Number<p-sortIcon field="recieptNumber">
+                                </p-sortIcon>
+                            </th>
+                            <th pSortableColumn="additionalFees">Payment Date<p-sortIcon field="paymentDate">
+                                </p-sortIcon>
+                            </th>
+                            <!-- <th pSortableColumn="rating">Password <p-sortIcon field="rating"></p-sortIcon></th> -->
+                            <th pSortableColumn="inventoryStatus">Recieved From </th>
+                            <th>Amount Paid</th>
+                            <th>Action</th>
+                        </tr>
+                    </ng-template>
+                    <ng-template pTemplate="body" let-product>
+                        <tr>
+
+                            <td>{{product.studentName | uppercase}}</td>
+                            <td>
+                                {{product.recieptNumber}}
+                            </td>
+                            <td>{{product.paymentDate | date:'short'}}</td>
+                            <td>{{product.recievedFrom}}</td>
+                            <td>{{product.amountPaid}}</td>
+                            <td>
+                                <button pButton pRipple icon="pi pi-pencil" pTooltip="Edit" tooltipPosition="bottom"
+                                    class="p-button-rounded p-button-success mr-2"
+                                    (click)="editFeesPayment(product)"></button>
+                                <button pButton pRipple icon="pi pi-trash" pTooltip="Delete" tooltipPosition="bottom"
+                                    class="p-button-rounded p-button-warning"
+                                    (click)="deleteFeesPayment(product._id)"></button>
+
+                            </td>
+                        </tr>
+                    </ng-template>
+                    <ng-template pTemplate="summary">
+                        <div class="p-d-flex p-ai-center p-jc-between">
+                            In total there are {{feesPaymenteArray ? feesPaymenteArray.length : 0 }} products.
+                        </div>
+                    </ng-template>
+                </p-table>
+            </div>
+
+
+            <p-dialog [(visible)]="feesPaymentDialog" [breakpoints]="{'960px': '75vw', '640px': '100vw'}"
+                [modal]="true" [style]="{width: '50vw'}" header="Account Details" styleClass="p-fluid">
+                <ng-template pTemplate="content">
+                    <div class="p-field mb-3 p-2">
+                    </div>
+                    <div class="p-field mb-3 p-2">
+                        <label for="name">Student Name with Contact Number</label>
+                        <p-dropdown [options]="studentUsers" [(ngModel)]="feesPaymentObj.studentName" required optionLabel="name" optionValue="name"
+                        [filter]="true" filterBy="name" [showClear]="true" placeholder="Select a Name"></p-dropdown>
+                        <!-- <p-dropdown  [autofocus]="true"></p-dropdown> -->
+                        <!-- <input type="text" pInputText id="name" [(ngModel)]="feesStructureObj.className" required
+                            autofocus /> -->
+                    </div>
+
+                    <div class="p-field mb-3 p-2">
+                        <label for="inventoryStatus">Amount Paid</label>
+                        <input type="number" pInputText id="name" [(ngModel)]="feesPaymentObj.amountPaid" required
+                            autofocus />
+                    </div>
+
+                    <div class="p-field mb-3 p-2">
+                        <label class="p-mb-3">Payment Date</label>
+                        <input type="date" pInputText id="name" [(ngModel)]="feesPaymentObj.paymentDate" required
+                            autofocus />
+                        <!-- <p-inputMask mask="99/99/9999" [(ngModel)]="feesPaymentObj.paymentDate" placeholder="dd/mm/yyyy" slotChar="dd/mm/yyyy"></p-inputMask> -->
+                        
+                    </div>
+
+                    <!-- <div class="p-field p-col mb-3">
+                        <label for="price">Re Select Student</label>
+                        <p-dropdown [(ngModel)]="feesPaymentObj.studentID" required [autofocus]="true"></p-dropdown>
+                    </div> -->
+                    <div class="p-field p-col">
+                        <label for="quantity">Recieved By</label>
+                        <input type="text" pInputText id="name" [(ngModel)]="feesPaymentObj.recievedFrom" required
+                        autofocus />
+                    </div>
+                </ng-template>
+
+                <ng-template pTemplate="footer">
+                    <button pButton pRipple label="Cancel" icon="pi pi-times" class="p-button-text"
+                        (click)="hideDialog()"></button>
+                    <button pButton pRipple label="Save" icon="pi pi-check" class="p-button-text"
+                        (click)="saveProductPayment()"></button>
+                </ng-template>
+            </p-dialog>
+        </p-tabPanel>
+    </p-tabView>
+</div>

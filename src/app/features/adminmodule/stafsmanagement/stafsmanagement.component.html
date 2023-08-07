@@ -1,1 +1,138 @@
-<p>stafsmanagement works!</p>
+<div class="card p-3 px-4">
+    <p-toolbar styleClass="mb-4">
+        <ng-template pTemplate="left">
+            <button pButton pRipple label="New" icon="pi pi-plus" class="p-button-success mr-2" (click)="openNew()"></button>
+            <button pButton pRipple [label]="Delete" icon="pi pi-trash" pTooltip="Bulk Delete" tooltipPosition="bottom" class="p-button-danger mr-2" (click)="deleteSelectedAccount()" [disabled]="!selectedStaff || !selectedStaff.length"></button>
+        </ng-template>
+
+        <ng-template pTemplate="right">
+            <p-fileUpload mode="basic" accept=".xlsx, .xls, .csv" [maxFileSize]="1000000" label="Import" chooseLabel="Import" class="mr-2 p-d-inline-block"></p-fileUpload>
+            <button pButton pRipple label="Export" (click)="exportExcel()" icon="pi pi-file-excel" class="p-button-success" pTooltip="Export data to XLS" tooltipPosition="bottom"></button>
+        </ng-template>
+    </p-toolbar>
+
+    <p-table #dt [value]="staffUsers" [rows]="10" [paginator]="true" [globalFilterFields]="['name','email','role','status']"
+        [(selection)]="selectedStaff" [rowHover]="true" dataKey="name" styleClass="p-datatable-responsive-demo"
+        currentPageReportTemplate="Showing {first} to {last} of {totalRecords} entries" [showCurrentPageReport]="true">
+        <ng-template pTemplate="caption">
+            <div class="grid">
+                <div class="col-4 md:col-6 text-start">
+                    <h3 class="p-m-0">Staff List</h3>
+                </div>
+                <div class="col-8 md:col-6 text-right">
+                    <span class="p-input-icon-left">
+                        <i class="pi pi-search"></i>
+                        <input pInputText type="text" (input)="dt.filterGlobal($event.target.value, 'contains')" placeholder="Search..." />
+                    </span>
+                </div>
+            </div>
+
+        </ng-template>
+        <ng-template pTemplate="header">
+            <tr>
+                <th style="width: 3rem">
+                    <p-tableHeaderCheckbox></p-tableHeaderCheckbox>
+                </th>
+                <th pSortableColumn="name">Name <p-sortIcon field="name"></p-sortIcon></th>
+                <th>Email</th>
+                <th pSortableColumn="price">Contact <p-sortIcon field="price"></p-sortIcon></th>
+                <th pSortableColumn="category">Created On <p-sortIcon field="category"></p-sortIcon></th>
+                <!-- <th pSortableColumn="rating">Password <p-sortIcon field="rating"></p-sortIcon></th> -->
+                <th pSortableColumn="inventoryStatus">Status <p-sortIcon field="inventoryStatus"></p-sortIcon></th>
+                <th>Action</th>
+            </tr>
+        </ng-template>
+        <ng-template pTemplate="body" let-product>
+            <tr>
+                <td>
+                    <p-tableCheckbox [value]="product"></p-tableCheckbox>
+                </td>
+                <td>{{product.name | uppercase}}</td>
+                <td>
+                    {{product.email}}
+                </td>
+                <td>{{product.contact}}</td>
+                <td>
+                    <p-chip label="{{product.createdAt| date:'short'}}" icon="pi pi-calendar-times"></p-chip>
+                    <!-- <p-badge value="{{product.createdAt| date:'short'}}"></p-badge> -->
+                    <!-- <p-avatar label="{{product.createdAt| date:'short'}}" styleClass="p-mr-2" [style]="{'background-color': '#9c27b0', 'color': '#ffffff'}" shape="circle"></p-avatar> -->
+                   </td>
+                <!-- <td>
+                    {{product.password}}  
+                </td> -->
+                <td>
+                    <p-tag styleClass="p-mr-2" severity="{{product.isActive?'success':'danger'}}" value="{{product.isActive ? 'Active':'Inactive'}}"></p-tag>
+                    <!-- <span [ngClass]="product.isActive?'text-green-500':'text-red-700'">{{product.isActive ? 'Active':'Inactive'}} </span> -->
+                    <!-- <span [class]="'product-badge status-' + (product.inventoryStatus ? product.inventoryStatus.toLowerCase() : '')">{{product.isActive}}</span></td> -->
+                <td>
+                    <button pButton pRipple icon="pi pi-pencil" pTooltip="Edit" tooltipPosition="bottom"
+                     class="p-button-rounded p-button-success mr-2" (click)="editAccount(product)"></button>
+                    
+                    <button pButton pRipple icon="pi pi-lock" pTooltip="Freez Account" tooltipPosition="bottom"
+                     class="p-button-rounded p-button-help mr-2" (click)="freezAccount(product._id,product.name)"></button>
+
+                    <button pButton pRipple icon="pi pi-lock-open" pTooltip="Unlock Account" tooltipPosition="bottom"
+                     class="p-button-rounded p-button-primary mr-2" (click)="unLockAccount(product._id)"></button>
+                    
+                    <button pButton pRipple icon="pi pi-trash" pTooltip="Delete" tooltipPosition="bottom"
+                     class="p-button-rounded p-button-warning" (click)="deleteAccount(product.email)"></button>
+
+                </td>
+            </tr>
+        </ng-template>
+        <ng-template pTemplate="summary">
+            <div class="p-d-flex p-ai-center p-jc-between">
+                In total there are {{staffUsers ? staffUsers.length : 0 }} products.
+            </div>
+        </ng-template>
+    </p-table>
+</div>
+
+<p-dialog [(visible)]="staffDialog"[breakpoints]="{'960px': '75vw', '640px': '100vw'}" [modal]="true" [style]="{width: '50vw'}" header="Account Details" styleClass="p-fluid">
+    <ng-template pTemplate="content">
+        <div class="p-field mb-3 p-2">
+        </div>
+        <div class="p-field mb-3 p-2">
+            <label for="name">Name</label>
+            <input type="text" pInputText id="name" [(ngModel)]="staffuserObj.name" required autofocus />
+        </div>
+        <!-- <div class="p-field">
+            <label for="description">Password</label>
+            <input type="text" pInputText id="name" [(ngModel)]="staffuserObj.password" required autofocus />
+        </div> -->
+        <div class="p-field mb-3 p-2">
+            <label for="inventoryStatus">Email</label>
+            <input type="text" pInputText id="name" [(ngModel)]="staffuserObj.email" required autofocus />
+        </div>
+
+        <div class="p-field mb-3 p-2">
+            <label class="p-mb-3">Contact</label>
+            <input type="text" pInputText id="name" maxlength="10" [(ngModel)]="staffuserObj.contact" required autofocus />
+        </div>
+
+        <div class="p-field mb-3 p-2">
+            <label class="p-mb-3">Date of Birth</label>
+            <!-- <p-inputMask mask="9999/99/99" [(ngModel)]="staffuserObj.DOB" placeholder="1980-now/1-12/0-30" slotChar="yyyy/mm/dd"></p-inputMask> -->
+            <input type="date" pInputText id="name" [(ngModel)]="staffuserObj.DOB" required autofocus />
+        </div>
+        
+
+            <div class="p-field p-col mb-3">
+                <label for="price">CreateOn</label>
+                <input type="text" pInputText [disabled]="true" id="name" [(ngModel)]="staffuserObj.createdAt" required autofocus />
+                <!-- <p-inputNumber id="price" [disabled]="true" [(ngModel)]="staffuserObj.createdAt" mode="currency" currency="USD" locale="en-US"></p-inputNumber> -->
+            </div>
+            <div class="p-field p-col">
+                <label for="quantity">Active</label>
+                <input type="text" pInputText [disabled]="true" id="name" [(ngModel)]="staffuserObj.isActive" required autofocus />
+                <!-- <p-inputNumber id="quantity" [disabled]="true" [(ngModel)]="staffuserObj.isActive"></p-inputNumber> -->
+            </div>
+        <h3 class="text-center"> Password is set to {{staffuserObj.password}} </h3>
+    </ng-template>
+
+    <ng-template pTemplate="footer">
+        <button pButton pRipple label="Cancel" icon="pi pi-times" class="p-button-text" (click)="hideDialog()"></button>
+        <button pButton pRipple label="Save" icon="pi pi-check" class="p-button-text" (click)="saveProduct()"></button>
+    </ng-template>
+</p-dialog>
+

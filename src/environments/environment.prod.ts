@@ -1,3 +1,4 @@
 export const environment = {
-  production: true
+  production: true,
+  localServer:'https://apna-school.onrender.com/apna-school/v1/'
 };

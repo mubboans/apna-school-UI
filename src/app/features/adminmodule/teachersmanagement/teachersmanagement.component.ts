@@ -20,7 +20,6 @@ export class TeachersmanagementComponent implements OnInit {
 
   submitted: boolean;
 
-  statuses: any[];
 
   cols = [
     { field: 'name', header: 'Name' },
@@ -55,23 +54,8 @@ export class TeachersmanagementComponent implements OnInit {
   }
 
   exportExcel() {
-    import("xlsx").then(xlsx => {
-        const worksheet = xlsx.utils.json_to_sheet(this.teacherUsers);
-        const workbook = { Sheets: { 'data': worksheet }, SheetNames: ['data'] };
-        const excelBuffer: any = xlsx.write(workbook, { bookType: 'xlsx', type: 'array' });
-        this.saveAsExcelFile(excelBuffer, "Teacher");
-    });
+   this.global.exportExcel(this.teacherUsers,"Teacher")
   }
-
-  saveAsExcelFile(buffer: any, Category: string): void {
-    let EXCEL_TYPE = 'application/vnd.openxmlformats-officedocument.spreadsheetml.sheet;charset=UTF-8';
-    let EXCEL_EXTENSION = '.xlsx';
-    const data: Blob = new Blob([buffer], {
-        type: EXCEL_TYPE
-    });
-    FileSaver.saveAs(data, Category + '_List_' + new Date().getTime()+ EXCEL_EXTENSION);
-  }
-
   openNew() {
     this.teacheruserObj = new User;
     this.submitted = false;

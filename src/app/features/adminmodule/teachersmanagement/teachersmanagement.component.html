@@ -7,19 +7,19 @@
 
         <ng-template pTemplate="right">
             <p-fileUpload mode="basic" accept=".xlsx, .xls, .csv" [maxFileSize]="1000000" label="Import" chooseLabel="Import" class="mr-2 p-d-inline-block"></p-fileUpload>
-            <button pButton pRipple label="Export to xlsx" (click)="exportExcel()" icon="pi pi-file-excel" class="p-button-success" pTooltip="Export Data to XLS" tooltipPosition="bottom"></button>
+            <button pButton pRipple label="Export" (click)="exportExcel()" icon="pi pi-file-excel" class="p-button-success" pTooltip="Export Data to XLS" tooltipPosition="bottom"></button>
         </ng-template>
     </p-toolbar>
 
-    <p-table #dt [value]="teacherUsers" [rows]="10" [paginator]="true" [globalFilterFields]="['name','email','role','status']"
+    <p-table #dt [value]="teacherUsers" [rows]="10" [paginator]="true" [globalFilterFields]="['name','email','contact','createdAt']"
         [(selection)]="selectedTeacher" [rowHover]="true" dataKey="name" styleClass="p-datatable-responsive-demo"
         currentPageReportTemplate="Showing {first} to {last} of {totalRecords} entries" [showCurrentPageReport]="true">
         <ng-template pTemplate="caption">
             <div class="grid">
-                <div class="col-12 md:col-6 text-start">
+                <div class="col-4 md:col-6 text-start">
                     <h3 class="p-m-0">Teacher List</h3>
                 </div>
-                <div class="col-12 md:col-6 text-right">
+                <div class="col-8 md:col-6 text-right">
                     <span class="p-input-icon-left">
                         <i class="pi pi-search"></i>
                         <input pInputText type="text" (input)="dt.filterGlobal($event.target.value, 'contains')" placeholder="Search..." />
@@ -35,10 +35,10 @@
                 </th>
                 <th pSortableColumn="name">Name <p-sortIcon field="name"></p-sortIcon></th>
                 <th>Email</th>
-                <th pSortableColumn="price">Contact <p-sortIcon field="price"></p-sortIcon></th>
-                <th pSortableColumn="category">Created On <p-sortIcon field="category"></p-sortIcon></th>
+                <th pSortableColumn="contact">Contact <p-sortIcon field="contact"></p-sortIcon></th>
+                <th pSortableColumn="createdOn">Created On <p-sortIcon field="createdOn"></p-sortIcon></th>
                 <!-- <th pSortableColumn="rating">Password <p-sortIcon field="rating"></p-sortIcon></th> -->
-                <th pSortableColumn="inventoryStatus">Status <p-sortIcon field="inventoryStatus"></p-sortIcon></th>
+                <th pSortableColumn="status">Status <p-sortIcon field="status"></p-sortIcon></th>
                 <th>Action</th>
             </tr>
         </ng-template>

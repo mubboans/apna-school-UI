@@ -4,6 +4,7 @@ import { BehaviorSubject, Observable, throwError } from 'rxjs';
 import { User } from '../models/user.model';
 import { LocalStorageDataService } from './local-storage-data.service';
 import { ConfirmationService, MessageService } from 'primeng/api';
+import * as FileSaver from 'file-saver';
 @Injectable({
   providedIn: 'root'
 })
@@ -35,5 +36,22 @@ export class GlobalService {
       header:obj.header,
       icon: obj.icon,
       accept:()=>{obj.deletefn()}});
+  }
+  exportExcel(array,filename) {
+    import("xlsx").then(xlsx => {
+        const worksheet = xlsx.utils.json_to_sheet(array);
+        const workbook = { Sheets: { 'data': worksheet }, SheetNames: ['data'] };
+        const excelBuffer: any = xlsx.write(workbook, { bookType: 'xlsx', type: 'array' });
+        this.saveAsExcelFile(excelBuffer, filename);
+    });
+  }
+
+  saveAsExcelFile(buffer: any, Category: string): void {
+    let EXCEL_TYPE = 'application/vnd.openxmlformats-officedocument.spreadsheetml.sheet;charset=UTF-8';
+    let EXCEL_EXTENSION = '.xlsx';
+    const data: Blob = new Blob([buffer], {
+        type: EXCEL_TYPE
+    });
+    FileSaver.saveAs(data, Category + '_List_' + new Date().getTime()+ EXCEL_EXTENSION);
   }
 }
