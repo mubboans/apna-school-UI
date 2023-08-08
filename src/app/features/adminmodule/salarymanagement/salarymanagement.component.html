@@ -66,17 +66,86 @@
 
 <p-dialog [(visible)]="salaryDialog" [breakpoints]="{'960px': '75vw', '640px': '50vw'}" [modal]="true" [style]="{width: '50vw'}" header="Account Details" styleClass="p-fluid">
     <ng-template pTemplate="content">
-        <div class="p-field mb-3 p-2">
+        <div class="card">
+            <h5>Salary Form</h5>
+            <div class="formgrid grid">
+                <div class="field col-12 md:col-6">
+                    <label for="firstname6">Organization name</label>
+                    <input id="firstname6" pInputText type="text" [(ngModel)]="salaryObj.organizationName" class="text-base text-color surface-overlay p-2 border-1 border-solid surface-border border-round appearance-none outline-none focus:border-primary w-full">
+                </div>
+                <div class="field col-12 md:col-6">
+                    <label for="firstname6">Logo Url (Optional)</label>
+                    <input id="firstname6" pInputText [(ngModel)]="salaryObj.logoUrl" type="text" class="text-base text-color surface-overlay p-2 border-1 border-solid surface-border border-round appearance-none outline-none focus:border-primary w-full">
+                </div>
+                <div class="field col-12 md:col-6">
+                    <label for="firstname6">Users</label>
+                    <p-dropdown [options]="studentUsers" [(ngModel)]="salaryObj.userId" required optionLabel="name" optionValue="id"
+                    [filter]="true" filterBy="name" [showClear]="true" placeholder="Select a Name"></p-dropdown>      
+                </div>
+              
+                <div class="field col-12 md:col-6">
+                    <label for="firstname6">Month</label>
+                    <p-dropdown [options]="months" [(ngModel)]="salaryObj.month" required optionLabel="name" optionValue="value"
+                    [filter]="true" filterBy="name" [showClear]="true" placeholder="Select a Month"></p-dropdown>
+
+                    <!-- <p-calendar [(ngModel)]="salaryObj.month" view="month" dateFormat="mm/yy" [yearNavigator]="true" yearRange="2000:2030" [readonlyInput]="true" inputId="monthpicker"></p-calendar> -->
+                  
+                </div>
+                <div class="field col-12 md:col-6">
+                    <label for="firstname6">Year</label>
+                    <p-dropdown [options]="years" [(ngModel)]="salaryObj.year" required optionLabel="name" optionValue="value"
+                    [filter]="true" filterBy="name" [showClear]="true" placeholder="Select a Month"></p-dropdown>
+                    <!-- <input id="firstname6" pInputText [(ngModel)]="salaryObj.year" type="number" class="text-base text-color surface-overlay p-2 border-1 border-solid surface-border border-round appearance-none outline-none focus:border-primary w-full"> -->
+                </div>
+
+                <div class="field col-12 md:col-6">
+                    <label for="firstname6">Paids Days</label>
+                    <input id="firstname6" pInputText [(ngModel)]="salaryObj.paidsDays" type="number" class="text-base text-color surface-overlay p-2 border-1 border-solid surface-border border-round appearance-none outline-none focus:border-primary w-full">
+                </div>
+                <div class="field col-12 md:col-6">
+                    <label for="firstname6">Leaves Days</label>
+                    <input id="firstname6" pInputText [(ngModel)]="salaryObj.leavesDays" type="number" class="text-base text-color surface-overlay p-2 border-1 border-solid surface-border border-round appearance-none outline-none focus:border-primary w-full">
+                </div>
+                <div class="field col-12 md:col-6">
+                    <label for="firstname6">Basic Amount</label>
+                    <input id="firstname6" pInputText [(ngModel)]="salaryObj.basicAmount" type="number" class="text-base text-color surface-overlay p-2 border-1 border-solid surface-border border-round appearance-none outline-none focus:border-primary w-full">
+                </div>
+                <div class="field col-12 md:col-6">
+                    <label for="firstname6">House Rent</label>
+                    <input id="firstname6" pInputText [(ngModel)]="salaryObj.houseRent" type="number" class="text-base text-color surface-overlay p-2 border-1 border-solid surface-border border-round appearance-none outline-none focus:border-primary w-full">
+                </div>
+                <div class="field col-12 md:col-6">
+                    <label for="firstname6">Transport Allowance</label>
+                    <input id="firstname6" pInputText [(ngModel)]="salaryObj.transportAllowance" type="number" class="text-base text-color surface-overlay p-2 border-1 border-solid surface-border border-round appearance-none outline-none focus:border-primary w-full">
+                </div>
+                <div class="field col-12 md:col-6">
+                    <label for="firstname6">Medical</label>
+                    <input id="firstname6" pInputText [(ngModel)]="salaryObj.mdeical" type="number" class="text-base text-color surface-overlay p-2 border-1 border-solid surface-border border-round appearance-none outline-none focus:border-primary w-full">
+                </div>
+                <div class="field col-12 md:col-6">
+                    <label for="firstname6">Fixed Allowance</label>
+                    <input id="firstname6" pInputText [(ngModel)]="salaryObj.fixedAllowance" type="number" class="text-base text-color surface-overlay p-2 border-1 border-solid surface-border border-round appearance-none outline-none focus:border-primary w-full">
+                </div>
+                <div class="field col-12 md:col-6">
+                    <label for="firstname6">Professional Tax</label>
+                    <input id="firstname6" pInputText [(ngModel)]="salaryObj.professionalTax" type="number" class="text-base text-color surface-overlay p-2 border-1 border-solid surface-border border-round appearance-none outline-none focus:border-primary w-full">
+                </div>
+                <div class="field col-12 md:col-6">
+                    <label for="firstname6">Other Tax</label>
+                    <input id="firstname6" pInputText [(ngModel)]="salaryObj.otherTax" type="number" class="text-base text-color surface-overlay p-2 border-1 border-solid surface-border border-round appearance-none outline-none focus:border-primary w-full">
+                </div>
+
+                <!-- "grossEarning": 7000, -->
+                <!-- "deductionAmount": 150, -->
+                <!-- "totalNetAmount": 6850, -->
+               
+            </div>
         </div>
-        <div class="p-field mb-3 p-2">
+        <!-- <div class="p-field mb-3 p-2">
             <label for="name">Organization name</label>
             <input type="text" pInputText id="name" [(ngModel)]="salaryObj.organizationName" required autofocus />
         </div>
-        <!-- <div class="p-field">
-            <label for="description">Password</label>
-            <input type="text" pInputText id="name" [(ngModel)]="studentuserObj.password" required autofocus />
-        </div> -->
-        <div class="p-field mb-3 p-2">
+       <div class="p-field mb-3 p-2">
             <label for="inventoryStatus">Logo Url</label>
             <input type="text" pInputText id="name" [(ngModel)]="salaryObj.logoUrl" required autofocus />
         </div>
@@ -88,7 +157,6 @@
 
         <div class="p-field mb-3 p-2">
             <label class="p-mb-3">Year</label>
-            <!-- <p-inputMask mask="9999/99/99" [(ngModel)]="salaryObj.DOB" placeholder="1980-now/1-12/0-30" slotChar="yyyy/mm/dd"></p-inputMask> -->
             <input type="date" pInputText id="name" [(ngModel)]="salaryObj.year" required autofocus />
         </div>
         
@@ -98,7 +166,7 @@
                 <p-dropdown [options]="studentUsers" [(ngModel)]="salaryObj.userId" required optionLabel="name" optionValue="id"
                         [filter]="true" filterBy="name" [showClear]="true" placeholder="Select a Name"></p-dropdown>
             </div>
-         
+          -->
     </ng-template>
 
     <ng-template pTemplate="footer">

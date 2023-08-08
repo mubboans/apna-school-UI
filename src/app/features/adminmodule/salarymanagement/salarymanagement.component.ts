@@ -21,19 +21,45 @@ export class SalarymanagementComponent implements OnInit {
   submitted: boolean;
 
   studentUsers:any[];
+
+  months = [
+    { value: 'january', name: 'January' },
+    { value: 'february', name: 'February' },
+    { value: 'march', name: 'March' },
+    { value: 'april', name: 'April' },
+    { value: 'may', name: 'May' },
+    { value: 'june', name: 'June' },
+    { value: 'july', name: 'July' },
+    { value: 'august', name: 'August' },
+    { value: 'september', name: 'September' },
+    { value: 'october', name: 'October' },
+    { value: 'november', name: 'November' },
+    { value: 'december', name: 'December' }
+  ];
+currentYear = new Date().getFullYear();
+endYear = 2050;
+
+years:any[]=[];
+
+
+
   
   constructor(public global: GlobalService, public profile: ProfileService, public auth: AuthService,
     public admin:AdminService) { }
 
   ngOnInit(): void {
     this.getSalary();
+    this.getUser();
+    for (let year = this.currentYear; year <= this.endYear; year++) {
+      this.years.push({ value: year, name: year });
+    }
   }
    exportExcel() {
   this.global.exportExcel(this.salaryArr,"Salary")
   }
 
   openNew() {
-    this.salaryObj = new User;
+    this.salaryObj ={};
     this.submitted = false;
     this.salaryDialog = true;
   }
@@ -45,7 +71,7 @@ export class SalarymanagementComponent implements OnInit {
       }
     })
   }
-  editAccount(studobj) {
+  edit(studobj) {
     this.salaryObj = { ...studobj };
     this.salaryDialog = true;
   }
@@ -53,7 +79,7 @@ export class SalarymanagementComponent implements OnInit {
     this.submitted = true;
     // let id = this.studentUsers.filter(user=>user.id == this.salaryObj.userId).map(x=>x.id) 
     // console.log(id);
-    this.salaryObj.userDetail = this.salaryObj.userId;
+
   //  this.feesPaymentObj.studentDetail=this.feesPaymentObj.studentID;
     if (this.salaryObj._id) {
       this.admin.fnUpdateSalary(this.salaryObj._id,this.salaryObj).subscribe((x: any) => {
@@ -64,6 +90,12 @@ export class SalarymanagementComponent implements OnInit {
       })
     }
     else {
+      this.salaryObj.userDetail = this.salaryObj.userId;
+      this.salaryObj.grossEarning = this.salaryObj.basicAmount+this.salaryObj.houseRent+
+      this.salaryObj.transportAllowance+this.salaryObj.mdeical+this.salaryObj.fixedAllowance;
+  
+      this.salaryObj.deductionAmount = this.salaryObj.professionalTax + this.salaryObj.otherTax ;
+      this.salaryObj.totalNetAmount = this.salaryObj.grossEarning-this.salaryObj.deductionAmount
 
         this.admin.fnPostSalary(this.salaryObj).subscribe((x: any) => {
           if (x.success) {
