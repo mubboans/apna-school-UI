@@ -112,9 +112,9 @@
 
         <div class="p-field mb-3 p-2">
             <label class="p-mb-3">Date of Birth</label>
-            <p-calendar [(ngModel)]="teacheruserObj.DOB" placeholder="DOB" [monthNavigator]="true" [yearNavigator]="true" yearRange="1980:2024" inputId="navigators"></p-calendar>
+            <!-- <p-calendar [(ngModel)]="teacheruserObj.DOB" placeholder="DOB" [monthNavigator]="true" [yearNavigator]="true" yearRange="1980:2024" inputId="navigators"></p-calendar> -->
             <!-- <p-inputMask mask="9999/99/99" [(ngModel)]="teacheruserObj.DOB" placeholder="1980-now/1-12/0-30" slotChar="yyyy/mm/dd"></p-inputMask> -->
-            <!-- <input type="text" pInputText id="name" [(ngModel)]="teacheruserObj.DOB" mask="99/99/9999" required autofocus /> -->
+            <input type="date" pInputText id="name" [(ngModel)]="teacheruserObj.DOB" required autofocus />
         </div>
         
 

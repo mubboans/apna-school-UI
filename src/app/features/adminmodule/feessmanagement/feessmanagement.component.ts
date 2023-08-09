@@ -30,15 +30,27 @@ export class FeessmanagementComponent implements OnInit {
 
   feesPaymentObj: any;
 
+  feesStructureDropDown:any[];
+
   ngOnInit(): void {
     this.getFeesStructure();
     this.getUser();
     this.getFeesPayement();
+    console.log(this.feesStructureDropDown,'feesStructureDropDown',this.feesStructureArray);
   }
   getFeesStructure(){
     this.admin.fnGetFeesStructure().subscribe((users: any) => {
       this.feesStructureArray = users.data;
+      
+      this.feesStructureDropDown = this.feesStructureArray.map(x=>({
+        className:x.className,
+        id:x._id,
+        totalFees:x.additionalFees+x.examinationFee+x.otherFees+x.tuitionFee
+      }))
+      console.log(this.feesStructureDropDown,'feesStructureDropDown',this.feesStructureArray);
     })
+   
+    
   }
   generateReceiptNumber() {
     const randomNumber = Math.floor(Math.random() * 9000000) + 1000000;
@@ -118,7 +130,7 @@ export class FeessmanagementComponent implements OnInit {
     this.feesPaymentObj.studentID = id[0];
    this.feesPaymentObj.studentDetail=this.feesPaymentObj.studentID;
      this.submitted = true;
-
+    
     if (this.feesPaymentObj._id) {
       
       this.admin.fnUpdateFeesPayment(this.feesPaymentObj._id,this.feesPaymentObj).subscribe((x: any) => {
@@ -130,6 +142,7 @@ export class FeessmanagementComponent implements OnInit {
     }
     else {
       this.feesPaymentObj.recieptNumber = this.generateReceiptNumber();
+      this.feesPaymentObj.feesStructureDetail = this.feesPaymentObj.feesStructureID 
         this.admin.fnPostFeesPayment(this.feesPaymentObj).subscribe((x: any) => {
           if (x.success) {
             this.global.showToast('success', x.message, x.status);;

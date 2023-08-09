@@ -221,6 +221,7 @@
                             <td>{{product.paymentDate | date:'short'}}</td>
                             <td>{{product.recievedFrom}}</td>
                             <td>{{product.amountPaid}}</td>
+                            <td></td>
                             <td>
                                 <button pButton pRipple icon="pi pi-pencil" pTooltip="Edit" tooltipPosition="bottom"
                                     class="p-button-rounded p-button-success mr-2"
@@ -245,6 +246,9 @@
                 [modal]="true" [style]="{width: '50vw'}" header="Account Details" styleClass="p-fluid">
                 <ng-template pTemplate="content">
                     <div class="p-field mb-3 p-2">
+                        <label for="name">Select Class</label>
+                        <p-dropdown [options]="feesStructureDropDown" [(ngModel)]="feesPaymentObj.feesStructureID" required optionLabel="className" optionValue="id"
+                        [filter]="true" filterBy="className" [showClear]="true" placeholder="Select a Class Name"></p-dropdown> 
                     </div>
                     <div class="p-field mb-3 p-2">
                         <label for="name">Student Name with Contact Number</label>
@@ -254,7 +258,7 @@
                         <!-- <input type="text" pInputText id="name" [(ngModel)]="feesStructureObj.className" required
                             autofocus /> -->
                     </div>
-
+                    
                     <div class="p-field mb-3 p-2">
                         <label for="inventoryStatus">Amount Paid</label>
                         <input type="number" pInputText id="name" [(ngModel)]="feesPaymentObj.amountPaid" required
