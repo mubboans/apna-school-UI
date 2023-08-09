@@ -56,7 +56,8 @@ import { CardSkeletonComponent } from './card-skeleton/card-skeleton.component';
   declarations: [
     EditProfileComponent,
     NotfoundpageComponent,
-    CardSkeletonComponent
+    CardSkeletonComponent,
+   
   ],
   imports: [
     SkeletonModule,

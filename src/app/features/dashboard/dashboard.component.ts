@@ -12,6 +12,9 @@ export class DashboardComponent implements OnInit {
   user:User;
   polardata: any;
   linedata:any;
+  name:string="almumin english high school";
+  month="June";
+  year="2023";
   constructor(public localData:LocalStorageDataService,public messageService:MessageService) { }
 
   ngOnInit(): void {
