@@ -24,32 +24,7 @@ export class AdminmoduleComponent implements OnInit {
 
   ngOnInit(): void {
     this.user = this.localData.getUserLocalData();
-    this.polardata = {
-      datasets: [{
-          data: [
-              11,
-              16,
-              7,
-              3,
-              14
-          ],
-          backgroundColor: [
-              "#FF6384",
-              "#4BC0C0",
-              "#FFCE56",
-              "#E7E9ED",
-              "#36A2EB"
-          ],
-          label: 'My dataset'
-      }],
-      labels: [
-          "Red",
-          "Green",
-          "Yellow",
-          "Grey",
-          "Blue"
-      ]
-  }
+  
   this.linedata={
     labels: ['January', 'February', 'March', 'April', 'May', 'June', 'July'],
     datasets: [
@@ -76,8 +51,20 @@ export class AdminmoduleComponent implements OnInit {
   getCard(){
     this.adminSer.fnGetCardDetail('2023-07-01','2023-08-01').subscribe((x:any)=>{
       this.cardData = x.data;
-      console.log(this.cardData,'cardData',Array.isArray(this.cardData));
-      
+      this.polardata = {
+        datasets: [{
+            data: this.cardData.map(x=>x.count),
+            backgroundColor: [
+               
+                "#4BC0C0",
+                "#FFCE56",
+                "#E7E9ED",
+                "#36A2EB"
+            ],
+            label: 'My dataset'
+        }],
+        labels:this.cardData.map(x=>x.role.toUpperCase())
+    }
     })
   }
 }
