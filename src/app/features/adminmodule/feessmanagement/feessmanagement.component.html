@@ -6,7 +6,7 @@
                 <span>Fees Structure</span>
             </ng-template>
 
-            <div class="card p-3 px-4">
+            <div class="card p-2 px-2">
                 <p-toolbar styleClass="mb-4">
                     <ng-template pTemplate="left">
                         <button pButton pRipple label="New" icon="pi pi-plus" class="p-button-success mr-2"
@@ -20,7 +20,11 @@
                             class="p-button-success" pTooltip="Export Fees Structure to XLS" tooltipPosition="bottom"></button>
                     </ng-template>
                 </p-toolbar>
-
+           <div class="card widget-table">
+            <div class="card-header line-height-4 mb-3">
+                <h3 class="p-m-0">Fees Structure</h3> 
+            </div>
+           </div>
                 <p-table #dt [value]="feesStructureArray" [rows]="10" [paginator]="true"
                     [globalFilterFields]="['name','email','role','status']" [(selection)]="selectedFeesstructure"
                     [rowHover]="true" dataKey="name" styleClass="p-datatable-responsive-demo"
