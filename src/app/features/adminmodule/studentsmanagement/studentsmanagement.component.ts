@@ -31,7 +31,9 @@ export class StudentsmanagementComponent implements OnInit {
     { field: 'isActive', header: 'Active'},
  
 ];
-  
+
+file:any;
+
   constructor(public global: GlobalService, public profile: ProfileService, public auth: AuthService) { }
 
   ngOnInit(): void {
@@ -45,6 +47,19 @@ export class StudentsmanagementComponent implements OnInit {
       }
     })
   }
+onUpload(event,fileUpload){
+  let File = event.files[0]
+  let formdata = new FormData();
+  formdata.append('users',File)
+  this.profile.fnCreateBulk(formdata).subscribe((x:any)=>{
+    if(x.success){
+      this.global.showToast('success',x.message,x.status);
+      this.getUser();
+    }
+  })
+  fileUpload.clear();
+    }
+
   unLockAccount(id) {
     this.profile.fnActivateUser(id).subscribe((x: any) => {
       if (x.success) {

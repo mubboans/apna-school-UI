@@ -1,0 +1,145 @@
+<div class="card p-3 px-4" >
+    <p-toolbar styleClass="mb-4">
+        <ng-template pTemplate="left">
+            <button pButton pRipple label="New" icon="pi pi-plus" class="p-button-success mr-2" (click)="openNew()"></button>
+            <!-- <button pButton pRipple [label]="Delete" icon="pi pi-trash" pTooltip="Bulk Delete" tooltipPosition="bottom" class="p-button-danger mr-2" (click)="deleteSelectedAccount()" [disabled]="!selectedStudents || !selectedStudents.length"></button> -->
+        </ng-template>
+
+        <ng-template pTemplate="right">
+            <!-- <p-fileUpload mode="basic" accept=".xlsx, .xls, .csv" [maxFileSize]="1000000" label="Import" chooseLabel="Import" class="mr-2 p-d-inline-block"></p-fileUpload> -->
+            <button pButton pRipple label="Export" (click)="exportExcel()" icon="pi pi-file-excel" class="p-button-success" pTooltip="Export data to XLS" tooltipPosition="bottom"></button>
+        </ng-template>
+    </p-toolbar>
+
+    <p-table #dt [value]="donationArry" [rows]="10" [paginator]="true" [globalFilterFields]="['organizationName','name','receiptNo','sumof']"
+     [rowHover]="true" dataKey="name" styleClass="p-datatable-responsive-demo"
+        currentPageReportTemplate="Showing {first} to {last} of {totalRecords} entries" [showCurrentPageReport]="true">
+        <ng-template pTemplate="caption">
+            <div class="grid">
+                <div class="col-4 md:col-6 text-start">
+                    <h3 class="p-m-0">Donation List</h3>
+                </div>
+                <div class="col-8 md:col-6 text-right">
+                    <span class="p-input-icon-left">
+                        <i class="pi pi-search"></i>
+                        <input pInputText type="text" (input)="dt.filterGlobal($event.target.value, 'contains')" placeholder="Search..." />
+                    </span>
+                </div>
+            </div>
+
+        </ng-template>
+        <ng-template pTemplate="header">
+            <tr>
+               
+                <!-- <th pSortableColumn="organizationName">Organization Name<p-sortIcon field="organizationName"></p-sortIcon></th> -->
+                <th pSortableColumn="name">Donor Name<p-sortIcon field="name"></p-sortIcon></th>
+                <th pSortableColumn="sumof">Sum-Of <p-sortIcon field="sumof"></p-sortIcon></th>
+                <th pSortableColumn="donatedAs">Donated As<p-sortIcon field="donatedAs"></p-sortIcon></th>
+                <th>Mode</th>
+                <th> Receipt No</th>
+                <th pSortableColumn="dated">Date<p-sortIcon field="dated"></p-sortIcon></th>
+                <th>Action</th>
+            </tr>
+        </ng-template>
+        <ng-template pTemplate="body" let-product>
+            <tr>
+                <td>{{product.name| uppercase}}</td>
+                <td>{{product.sumof}}</td>
+                <td>{{product.donatedAs}}</td>
+                <td>{{product.mode}}</td>
+                <td> {{product.receiptNo}} </td>
+                <td><p-chip label=" {{product.dated | date:'shortDate'}}" icon="pi pi-calendar"></p-chip></td>
+                <td>
+                    <button pButton pRipple icon="pi pi-download" pTooltip="Donation pdf" tooltipPosition="bottom"
+                     class="p-button-rounded p-button-danger mr-2" (click)="downloadPdf(product._id)"></button>    
+
+                    <button pButton pRipple icon="pi pi-pencil" pTooltip="Edit" tooltipPosition="bottom"
+                     class="p-button-rounded p-button-success mr-2" (click)="edit(product)"></button>    
+                    <button pButton pRipple icon="pi pi-trash" pTooltip="Delete" tooltipPosition="bottom"
+                     class="p-button-rounded p-button-warning" (click)="delete(product._id)"></button>
+                </td>
+            </tr>
+        </ng-template>
+        <ng-template pTemplate="summary">
+            <div class="p-d-flex p-ai-center p-jc-between">
+                In total there are {{donationArry ? donationArry.length : 0 }} Records.
+            </div>
+        </ng-template>
+    </p-table>
+    <!-- <app-salary-slip *ngIf="salaryArr" [salArr]="salaryArr"></app-salary-slip> -->
+</div>
+ 
+<!-- <p-dialog id="salslip" [showHeader]="false"  [(visible)]="salaryModal" [breakpoints]="{'960px': '75vw', '640px': '50vw'}" [modal]="true" [style]="{width: '90vw'}" header="Account Details" styleClass="p-fluid">
+    
+    <app-salary-slip *ngIf="salaryModal" (bookTitleCreated)=generatePdf($event) [salArr]="salaryShowObj"></app-salary-slip>
+    
+</p-dialog> -->
+<p-dialog [(visible)]="donationDialog" [breakpoints]="{'960px': '75vw', '640px': '50vw'}" [modal]="true" [style]="{width: '50vw'}" header="Donation Form" styleClass="p-fluid">
+    <ng-template pTemplate="content">
+        <div class="card">
+            <div class="formgrid grid">
+                <div class="field col-12 md:col-6">
+                    <label for="firstname6">Organization</label>
+                    <p-dropdown [options]="organizationArr" [(ngModel)]="donationObj.organizationID" required optionLabel="name" optionValue="id"
+                    [filter]="true" filterBy="name" [showClear]="true" placeholder="Select a Organization"></p-dropdown>
+                    <!-- <input id="firstname6" pInputText type="text" [(ngModel)]="donationObj.organizationName" class="text-base text-color surface-overlay p-2 border-1 border-solid surface-border border-round appearance-none outline-none focus:border-primary w-full"> -->
+                </div>
+                <!-- <div class="field col-12 md:col-6">
+                    <label for="firstname6">Logo Url (Optional)</label>
+                    <input id="firstname6" pInputText [(ngModel)]="donationObj.logoUrl" type="text" class="text-base text-color surface-overlay p-2 border-1 border-solid surface-border border-round appearance-none outline-none focus:border-primary w-full">
+                </div> -->
+                <div class="field col-12 md:col-6">
+                    <label for="firstname6">Donor Name</label>
+                    <input id="firstname6" pInputText [(ngModel)]="donationObj.name" type="text" class="text-base text-color surface-overlay p-2 border-1 border-solid surface-border border-round appearance-none outline-none focus:border-primary w-full">
+                </div>
+              
+                <div class="field col-12 md:col-6">
+                    <label for="firstname6">Sum-Of</label>
+                    <input id="firstname6" pInputText [(ngModel)]="donationObj.sumof" type="number" class="text-base text-color surface-overlay p-2 border-1 border-solid surface-border border-round appearance-none outline-none focus:border-primary w-full">
+                </div>
+                <div class="field col-12 md:col-6">
+                    <label for="firstname6">Mode</label>
+                    <p-dropdown [options]="mode" [(ngModel)]="donationObj.mode" required optionLabel="name" optionValue="value"
+                    placeholder="Select a Mode"></p-dropdown>
+                    <!-- <input id="firstname6" pInputText [(ngModel)]="donationObj.year" type="number" class="text-base text-color surface-overlay p-2 border-1 border-solid surface-border border-round appearance-none outline-none focus:border-primary w-full"> -->
+                </div>
+                <div class="field col-12 md:col-6">
+                    <label for="firstname6">Cheque No</label>
+                    <input id="firstname6" pInputText [(ngModel)]="donationObj.checkno" type="text" class="text-base text-color surface-overlay p-2 border-1 border-solid surface-border border-round appearance-none outline-none focus:border-primary w-full">
+                </div>
+                <div class="field col-12 md:col-6">
+                    <label for="firstname6">Dated</label>
+                    <input id="firstname6" pInputText [(ngModel)]="donationObj.dated" type="date" class="text-base text-color surface-overlay p-2 border-1 border-solid surface-border border-round appearance-none outline-none focus:border-primary w-full">
+                </div>
+                <div class="field col-12 md:col-6">
+                    <label for="firstname6">Drawn On</label>
+                    <input id="firstname6" pInputText [(ngModel)]="donationObj.drawnOn" type="text" class="text-base text-color surface-overlay p-2 border-1 border-solid surface-border border-round appearance-none outline-none focus:border-primary w-full">
+                </div>
+                <div class="field col-12 md:col-6">
+                    <label for="firstname6">Donated As</label>
+                    <input id="firstname6" pInputText [(ngModel)]="donationObj.donatedAs" type="text" class="text-base text-color surface-overlay p-2 border-1 border-solid surface-border border-round appearance-none outline-none focus:border-primary w-full">
+                </div>
+                <div class="field col-12 md:col-6">
+                    <label for="firstname6">Amount</label>
+                    <input id="firstname6" pInputText [(ngModel)]="donationObj.amount" type="number" class="text-base text-color surface-overlay p-2 border-1 border-solid surface-border border-round appearance-none outline-none focus:border-primary w-full">
+                </div>
+                <div class="field col-12 md:col-6">
+                    <label for="firstname6">Note for trust</label>
+                    <input id="firstname6" pInputText [(ngModel)]="donationObj.fortrust" type="text" class="text-base text-color surface-overlay p-2 border-1 border-solid surface-border border-round appearance-none outline-none focus:border-primary w-full">
+                </div>
+                <div class="field col-12 md:col-6">
+                    <label for="firstname6">Creation Date</label>
+                    <input id="firstname6" pInputText [(ngModel)]="donationObj.creationdate" type="date" class="text-base text-color surface-overlay p-2 border-1 border-solid surface-border border-round appearance-none outline-none focus:border-primary w-full">
+                </div>
+               
+            </div>
+        </div>
+    
+    </ng-template>
+
+    <ng-template pTemplate="footer">
+        <button pButton pRipple label="Cancel" icon="pi pi-times" class="p-button-text" (click)="hideDialog()"></button>
+        <button pButton pRipple label="Save" icon="pi pi-check" class="p-button-text" (click)="saveProduct()"></button>
+    </ng-template>
+</p-dialog>
+

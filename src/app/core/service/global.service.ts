@@ -1,10 +1,15 @@
 import { HttpErrorResponse } from '@angular/common/http';
-import { Injectable } from '@angular/core';
+import { ElementRef, Injectable } from '@angular/core';
 import { BehaviorSubject, Observable, throwError } from 'rxjs';
 import { User } from '../models/user.model';
 import { LocalStorageDataService } from './local-storage-data.service';
 import { ConfirmationService, MessageService } from 'primeng/api';
 import * as FileSaver from 'file-saver';
+
+import { DomSanitizer, SafeUrl } from '@angular/platform-browser';
+
+// import * as jsPDF from 'jspdf';
+
 @Injectable({
   providedIn: 'root'
 })
@@ -12,12 +17,16 @@ export class GlobalService {
   showSideBar:BehaviorSubject<boolean>= new BehaviorSubject<boolean>(false); 
   user:User = this.local.getUserLocalData();
   showLoader:boolean;
-  constructor(public local:LocalStorageDataService,
+  constructor(public local:LocalStorageDataService,private sanitizer: DomSanitizer,
     public messageService: MessageService,public confirmationService: ConfirmationService)
    { }
   showSidebar(){
     this.showSideBar.next(true);
   }
+ savePdf(obj,name){
+    return FileSaver.default(obj, name);
+  }
+
   hideSidebar(){
     this.showSideBar.next(false);
   }

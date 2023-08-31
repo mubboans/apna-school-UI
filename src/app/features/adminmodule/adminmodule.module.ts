@@ -11,6 +11,8 @@ import { TeachersmanagementComponent } from './teachersmanagement/teachersmanage
 import { SharedModule } from 'src/app/shared/shared.module';
 import { ChartModule } from 'primeng/chart';
 import { SalarymanagementComponent } from './salarymanagement/salarymanagement.component';
+import { OrganizationComponent } from './organization/organization.component';
+import { DonationmanagementComponent } from './donationmanagement/donationmanagement.component';
 
 
 @NgModule({
@@ -22,7 +24,9 @@ import { SalarymanagementComponent } from './salarymanagement/salarymanagement.c
     StafsmanagementComponent,
     StudentsmanagementComponent,
     TeachersmanagementComponent,
-    SalarymanagementComponent
+    SalarymanagementComponent,
+    OrganizationComponent,
+    DonationmanagementComponent
   ],
   imports: [
     CommonModule,

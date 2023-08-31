@@ -69,4 +69,11 @@ fnGetAllUser(){
     map((x)=>{return x}),catchError(this.global.handleError)
   )
 }
+fnCreateBulk(file){
+  console.log(file,'file');
+  
+  return this.http.post(this.profileUrl+'bulkcreate',file).pipe(
+    map((x)=>{return x}),catchError(this.global.handleError)
+)
+}
 }

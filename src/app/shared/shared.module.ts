@@ -52,12 +52,13 @@ import { ChipModule } from 'primeng/chip';
 import { DividerModule } from "primeng/divider";
 import { NotfoundpageComponent } from './notfoundpage/notfoundpage.component';
 import { CardSkeletonComponent } from './card-skeleton/card-skeleton.component';
+import { SalarySlipComponent } from './salary-slip/salary-slip.component';
 @NgModule({
   declarations: [
     EditProfileComponent,
     NotfoundpageComponent,
     CardSkeletonComponent,
-   
+    SalarySlipComponent
   ],
   imports: [
     SkeletonModule,
@@ -120,6 +121,7 @@ import { CardSkeletonComponent } from './card-skeleton/card-skeleton.component';
     AccordionModule,
   ],
   exports:[
+    SalarySlipComponent,
     SkeletonModule,
     DividerModule,
     ChipModule,

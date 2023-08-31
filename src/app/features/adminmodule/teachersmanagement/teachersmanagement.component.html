@@ -6,7 +6,9 @@
         </ng-template>
 
         <ng-template pTemplate="right">
-            <p-fileUpload mode="basic" accept=".xlsx, .xls, .csv" [maxFileSize]="1000000" label="Import" chooseLabel="Import" class="mr-2 p-d-inline-block"></p-fileUpload>
+            <p-fileUpload #fileUpload mode="basic" chooseLabel="Import" [auto]="true" customUpload="true"
+             (uploadHandler)="onUpload($event,fileUpload)" accept=".csv" [maxFileSize]="1000000"
+              label="Import" class="mr-2 p-d-inline-block"></p-fileUpload>
             <button pButton pRipple label="Export" (click)="exportExcel()" icon="pi pi-file-excel" class="p-button-success" pTooltip="Export Data to XLS" tooltipPosition="bottom"></button>
         </ng-template>
     </p-toolbar>

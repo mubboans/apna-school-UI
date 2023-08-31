@@ -8,6 +8,8 @@ import { AdminGuardGuard } from './admin-guard.guard';
 import { StafsmanagementComponent } from './stafsmanagement/stafsmanagement.component';
 import { SalarymanagementComponent } from './salarymanagement/salarymanagement.component';
 import { NoticeManagementComponent } from '../generalmodule/notice-management/notice-management.component';
+import { OrganizationComponent } from './organization/organization.component';
+import { DonationmanagementComponent } from './donationmanagement/donationmanagement.component';
 
 const routes: Routes = [{ path: '', component: AdminmoduleComponent },
 {path:'student', component: StudentsmanagementComponent,canActivate:[AdminGuardGuard]},
@@ -16,6 +18,8 @@ const routes: Routes = [{ path: '', component: AdminmoduleComponent },
 {path:'staff',component:StafsmanagementComponent,canActivate:[AdminGuardGuard]},
 {path:'salary',component:SalarymanagementComponent,canActivate:[AdminGuardGuard]},
 {path:'notice',component:NoticeManagementComponent,canActivate:[AdminGuardGuard]},
+{path:'organization',component:OrganizationComponent,canActivate:[AdminGuardGuard]},
+{path:'donation',component:DonationmanagementComponent,canActivate:[AdminGuardGuard]},
 ];
 
 @NgModule({

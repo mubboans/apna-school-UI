@@ -1,0 +1,131 @@
+<div class="card p-3 px-4" >
+    <p-toolbar styleClass="mb-4">
+        <ng-template pTemplate="left">
+            <button pButton pRipple label="New" icon="pi pi-plus" class="p-button-success mr-2" (click)="openNew()"></button>
+            <!-- <button pButton pRipple [label]="Delete" icon="pi pi-trash" pTooltip="Bulk Delete" tooltipPosition="bottom" class="p-button-danger mr-2" (click)="deleteSelectedAccount()" [disabled]="!selectedStudents || !selectedStudents.length"></button> -->
+        </ng-template>
+
+        <ng-template pTemplate="right">
+            <!-- <p-fileUpload mode="basic" accept=".xlsx, .xls, .csv" [maxFileSize]="1000000" label="Import" chooseLabel="Import" class="mr-2 p-d-inline-block"></p-fileUpload> -->
+            <button pButton pRipple label="Export" (click)="exportExcel()" icon="pi pi-file-excel" class="p-button-success" pTooltip="Export data to XLS" tooltipPosition="bottom"></button>
+        </ng-template>
+    </p-toolbar>
+
+    <p-table #dt [value]="orgArr" [rows]="10" [paginator]="true" [globalFilterFields]="['name','pan','bankaccount','upiId']"
+     [rowHover]="true" dataKey="name" styleClass="p-datatable-responsive-demo"
+        currentPageReportTemplate="Showing {first} to {last} of {totalRecords} entries" [showCurrentPageReport]="true">
+        <ng-template pTemplate="caption">
+            <div class="grid">
+                <div class="col-4 md:col-6 text-start">
+                    <h3 class="p-m-0">Organization List</h3>
+                </div>
+                <div class="col-8 md:col-6 text-right">
+                    <span class="p-input-icon-left">
+                        <i class="pi pi-search"></i>
+                        <input pInputText type="text" (input)="dt.filterGlobal($event.target.value, 'contains')" placeholder="Search..." />
+                    </span>
+                </div>
+            </div>
+
+        </ng-template>
+        <ng-template pTemplate="header">
+            <tr>
+               
+                <th pSortableColumn="organizationName">Organization Name<p-sortIcon field="organizationName"></p-sortIcon></th>
+                <th>Logo</th>
+                <th>State</th>
+                <th>City</th>
+                <th>Pan</th>
+                <th pSortableColumn="bankaccount">Bank Account<p-sortIcon field="bankaccount"></p-sortIcon></th>
+                <th>UPI</th>
+                <th>Action</th>
+            </tr>
+        </ng-template>
+        <ng-template pTemplate="body" let-product>
+            <tr>
+                <td>{{product.name | uppercase}}</td>
+                <td> <img [src]="product.logoUrl" width="100" class="p-shadow-4" /></td>
+                <td>{{product.address.state}}</td>
+                <td>{{product.address.city}}</td>
+                <td><p-chip label=" {{product.pan}}" icon="pi pi-users"></p-chip></td>
+                <td>{{product.bankaccount}}</td>
+                <td> {{product.upiId}} </td>
+                <td>
+                    <button pButton pRipple icon="pi pi-pencil" pTooltip="Edit" tooltipPosition="bottom"
+                     class="p-button-rounded p-button-success mr-2" (click)="edit(product)"></button>    
+                    <button pButton pRipple icon="pi pi-trash" pTooltip="Delete" tooltipPosition="bottom"
+                     class="p-button-rounded p-button-warning" (click)="delete(product._id)"></button>
+                </td>
+            </tr>
+        </ng-template>
+        <ng-template pTemplate="summary">
+            <div class="p-d-flex p-ai-center p-jc-between">
+                In total there are {{salaryArr ? salaryArr.length : 0 }} products.
+            </div>
+        </ng-template>
+    </p-table>
+    <!-- <app-salary-slip *ngIf="salaryArr" [salArr]="salaryArr"></app-salary-slip> -->
+</div>
+ 
+
+<p-dialog [(visible)]="orgDialog" [breakpoints]="{'960px': '75vw', '640px': '50vw'}" [modal]="true" [style]="{width: '50vw'}" header="Account Details" styleClass="p-fluid">
+    <ng-template pTemplate="content">
+        <div class="card">
+            <h5>Organization Form</h5>
+            <div class="formgrid grid">
+                <div class="field col-12 md:col-6">
+                    <label for="firstname6">Name</label>
+                    <input id="firstname6" pInputText type="text" [(ngModel)]="orgObj.name" class="text-base text-color surface-overlay p-2 border-1 border-solid surface-border border-round appearance-none outline-none focus:border-primary w-full">
+                </div>
+                <div class="field col-12 md:col-6">
+                    <label for="firstname6">Logo Url (Optional)</label>
+                    <input id="firstname6" pInputText [(ngModel)]="orgObj.logoUrl" type="text" class="text-base text-color surface-overlay p-2 border-1 border-solid surface-border border-round appearance-none outline-none focus:border-primary w-full">
+                </div>
+                <div class="field col-12 md:col-6">
+                    <label for="firstname6">Street</label>
+                    <input id="firstname6" pInputText [(ngModel)]="orgObj.address.street" type="text" class="text-base text-color surface-overlay p-2 border-1 border-solid surface-border border-round appearance-none outline-none focus:border-primary w-full">
+                </div>
+              
+                <div class="field col-12 md:col-6">
+                    <label for="firstname6">City</label>
+                    <input id="firstname6" pInputText [(ngModel)]="orgObj.address.city" type="text" class="text-base text-color surface-overlay p-2 border-1 border-solid surface-border border-round appearance-none outline-none focus:border-primary w-full">
+                    <!-- <p-calendar [(ngModel)]="orgObj.month" view="month" dateFormat="mm/yy" [yearNavigator]="true" yearRange="2000:2030" [readonlyInput]="true" inputId="monthpicker"></p-calendar> -->
+                  
+                </div>
+                <div class="field col-12 md:col-6">
+                    <label for="firstname6">State</label>
+                    <input id="firstname6" pInputText [(ngModel)]="orgObj.address.state" type="text" class="text-base text-color surface-overlay p-2 border-1 border-solid surface-border border-round appearance-none outline-none focus:border-primary w-full">
+                </div>
+
+                <div class="field col-12 md:col-6">
+                    <label for="firstname6">Postal Code</label>
+                    <input id="firstname6" pInputText [(ngModel)]="orgObj.address.postalCode" type="number" class="text-base text-color surface-overlay p-2 border-1 border-solid surface-border border-round appearance-none outline-none focus:border-primary w-full">
+                </div>
+                <div class="field col-12 md:col-6">
+                    <label for="firstname6">Country</label>
+                    <input id="firstname6" pInputText [(ngModel)]="orgObj.address.country" type="text" class="text-base text-color surface-overlay p-2 border-1 border-solid surface-border border-round appearance-none outline-none focus:border-primary w-full">
+                </div>
+                <div class="field col-12 md:col-6">
+                    <label for="firstname6">Pan</label>
+                    <input id="firstname6" pInputText [(ngModel)]="orgObj.pan" type="text" maxlength="10" class="text-base text-color surface-overlay p-2 border-1 border-solid surface-border border-round appearance-none outline-none focus:border-primary w-full">
+                </div>
+                <div class="field col-12 md:col-6">
+                    <label for="firstname6">Bank Account</label>
+                    <input id="firstname6" pInputText [(ngModel)]="orgObj.bankaccount" type="text" class="text-base text-color surface-overlay p-2 border-1 border-solid surface-border border-round appearance-none outline-none focus:border-primary w-full">
+                </div>
+                <div class="field col-12 md:col-6">
+                    <label for="firstname6">UPI</label>
+                    <input id="firstname6" pInputText [(ngModel)]="orgObj.upiId" type="text" class="text-base text-color surface-overlay p-2 border-1 border-solid surface-border border-round appearance-none outline-none focus:border-primary w-full">
+                </div>
+
+            </div>
+        </div>
+    
+    </ng-template>
+
+    <ng-template pTemplate="footer">
+        <button pButton pRipple label="Cancel" icon="pi pi-times" class="p-button-text p-button-danger " (click)="hideDialog()"></button>
+        <button pButton pRipple label="Save" icon="pi pi-check" class="p-button-text p-button-success" (click)="saveProduct()"></button>
+    </ng-template>
+</p-dialog>
+

@@ -12,6 +12,8 @@ export class AdminService {
   feesStructureUrl = this.adminUrl + 'fees/structure/';
   feesPaymentUrl = this.adminUrl + 'fees/payment/';
   salaryUrl = this.adminUrl + 'salary/';
+  organizationUrl = this.adminUrl + 'organization/';
+  donationUrl = this.adminUrl + 'donation/';
   constructor(public http:HttpClient,public global:GlobalService) { }
   fnGetCardDetail(startdate,enddate){
     return this.http.get(`${this.adminUrl}dashboard/card?startdate=${startdate}&enddate=${enddate}`).pipe(
@@ -120,6 +122,90 @@ export class AdminService {
         return x;
       }),
       catchError(this.global.handleError)
+    )
+  }
+
+
+  fnGetOrg(){
+    return this.http.get(`${this.organizationUrl}get`).pipe(
+      map((x)=>{
+        return x;
+      }),
+      catchError(this.global.handleError)
+    )
+  }
+
+  fnPostOrg(data){
+    return this.http.post(`${this.organizationUrl}add`,data).pipe(
+      map((x)=>{
+        return x;
+      }),
+      catchError(this.global.handleError)
+    )
+  }
+  fnUpdateOrg(id,data){
+    return this.http.put(`${this.organizationUrl}update:${id}`,data).pipe(
+      map((x)=>{
+        return x;
+      }),
+      catchError(this.global.handleError)
+    )
+  }
+  fnDeleteOrg(id){
+    return this.http.delete(`${this.organizationUrl}delete:${id}`).pipe(
+      map((x)=>{
+        return x;
+      }),
+      catchError(this.global.handleError)
+    )
+  }
+  fnGetSalaryPdf(id){ 
+    return this.http.get(`${this.salaryUrl}getpdf:${id}`,{responseType:'arraybuffer'}).pipe(
+      map((x)=>{
+        return x;
+      }),
+      catchError(this.global.handleError) 
+    )
+  }
+
+  fnGetDonation(){
+    return this.http.get(`${this.donationUrl}get`).pipe(
+      map((x)=>{
+        return x;
+      }),
+      catchError(this.global.handleError)
+    )
+  }
+  fnPostDonation(data){
+    return this.http.post(`${this.donationUrl}add`,data).pipe(
+      map((x)=>{
+        return x;
+      }),
+      catchError(this.global.handleError)
+    )
+  }
+  fnUpdateDonation(id,data){
+    return this.http.put(`${this.donationUrl}update:${id}`,data).pipe(
+      map((x)=>{
+        return x;
+      }),
+      catchError(this.global.handleError)
+    )
+  }
+  fnDeleteDonation(id){
+    return this.http.delete(`${this.donationUrl}delete:${id}`).pipe(
+      map((x)=>{
+        return x;
+      }),
+      catchError(this.global.handleError)
+    )
+  }
+  fnGetDonationPdf(id){ 
+    return this.http.get(`${this.donationUrl}getpdf:${id}`,{responseType:'arraybuffer'}).pipe(
+      map((x)=>{
+        return x;
+      }),
+      catchError(this.global.handleError) 
     )
   }
 }

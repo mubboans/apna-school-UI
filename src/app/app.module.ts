@@ -16,7 +16,7 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { ChangePasswordComponent } from './core/auth-component/change-password/change-password.component';
 import { RouterModule } from '@angular/router';
 import { LoaderComponent } from './core/common-component/loader/loader.component';
-import { SalarySlipComponent } from './shared/salary-slip/salary-slip.component';
+// import { SalarySlipComponent } from './shared/salary-slip/salary-slip.component';
 @NgModule({
   declarations: [
     AppComponent,
@@ -29,7 +29,7 @@ import { SalarySlipComponent } from './shared/salary-slip/salary-slip.component'
     FooterComponent,
     ChangePasswordComponent,
     LoaderComponent,
-    SalarySlipComponent
+    
   ],
   imports: [
     BrowserModule,

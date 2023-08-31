@@ -1,381 +1,130 @@
-<div class="grid flex align-items-center justify-content-center">
-    <div class="col-12 md:col-8">
-        <h2> {{organizationname |uppercase}}</h2>
-    </div>  
-    <div class="col-12 md:col-4 text-right ">
-        <img height="100" width="150" src="../../../assets/images/salary-logo.png" alt="">
-    </div>
-    <div class="col-12">
-        <h4>Payslip for the month of {{month}} {{year}} </h4>
-    </div>
-    <div class="col-12 md:col-8">
-       
-        <!-- <table>
-            <thead>
-                <h4> Employee Pay Summary</h4>
-            </thead>
-            <tr>
-                <td> Employee Name </td>
-                <td> Mubashir Rafique Ansari, DS-1017 </td>
-            </tr>
-            <tr>
-                <td> Designation </td>
-                <td> Jr. Angular Developer </td>
-            </tr>
-            <tr>
-                <td>Date of Joining </td>
-                <td> 12/12/2022 </td>
-            </tr>
-            <tr>
-                <td>Pay Period </td>
-                <td> June 2023 </td>
-            </tr>
-            <tr>
-                <td>Pay Date </td>
-                <td> 10/02/2023 </td>
-            </tr>
-            <tr>
-                <td>Pan </td>
-                <td> dlqpa6993c </td>
-            </tr>
-            <tr>
-                <td>Bank Account No </td>
-                <td> 081928370912 </td>
-            </tr>
-            
-        </table> -->
-       
-<table role="table" id="pr_id_28-table" class="p-datatable-table ng-star-inserted" style="min-width: 60rem;">
-    <!---->
-    <thead class="p-datatable-thead text-left">
-        <tr class="ng-star-inserted">
-            <th colspan="2"><h4 class="font-bold text-lg">Employee Pay Summary</h4></th>
-        </tr>
-    </thead>
-    <tbody class="p-element p-datatable-tbody">
-        <tr class="ng-star-inserted">
 
-            <td>
-                <div class="flex align-items-center">
-                    <!-- <span class="border-circle mr-2 bg-purple-500"
-                        style="width: 7px; height: 7px;"></span> -->
-                    <p class="mt-0 mb-0 font-medium text-lg text-color-primary">Employee Name</p>
-                </div>
-            </td>
-            <td>
-                <p class="mt-0 mb-0 font-normal text-base text-color-secondary">Mubashir Rafique Ansari, DS-1017</p>
-            </td>
-            
-          
-        </tr>
-        <tr class="ng-star-inserted">
-            <td>
-                <div class="flex align-items-center">
-                    <!-- <span class="border-circle mr-2 bg-blue-500"
-                        style="width: 7px; height: 7px;"></span> -->
-                    <p class="mt-0 mb-0 font-medium text-lg text-color-primary">Designation</p>
-                </div>
-            </td>
-            <td>
-                <p class="mt-0 mb-0 font-normal text-base text-color-secondary">Teacher</p>
-            </td>
-          
-        </tr>
-
-        <tr class="ng-star-inserted">
-            <td>
-                <div class="flex align-items-center">
-                    <!-- <span class="border-circle mr-2 bg-green-500"
-                        style="width: 7px; height: 7px;"></span> -->
-                    <p class="mt-0 mb-0 font-medium text-lg text-color-primary">Date of Joining</p>
-                </div>
-            </td>
-            <td>
-                <p class="mt-0 mb-0 font-normal text-base text-color-secondary">Oct 30, 2022</p>
-            </td>
-           
-        </tr>
-       
-        <tr class="ng-star-inserted">
-            <td>
-                <div class="flex align-items-center">
-                    <!-- <span class="border-circle mr-2 bg-red-500"
-                        style="width: 7px; height: 7px;"></span> -->
-                    <p class="mt-0 mb-0 font-medium text-lg text-color-primary">Pay Period </p>
-                </div>
-            </td>
-            <td>
-                <p class="mt-0 mb-0 font-normal text-base text-color-secondary">Oct 30, 2022</p>
-            </td>
-           
-        </tr>
-        
-        <tr class="ng-star-inserted">
-            <td>
-                <div class="flex align-items-center">
-                    <!-- <span class="border-circle mr-2 bg-indigo-500"
-                        style="width: 7px; height: 7px;"></span> -->
-                    <p class="mt-0 mb-0 font-medium text-lg text-color-primary">Pay Date</p>
-                </div>
-            </td>
-            <td>
-                <p class="mt-0 mb-0 font-normal text-base text-color-secondary">Oct 30, 2022</p>
-            </td>
-           
-        </tr>
-    
-        <tr class="ng-star-inserted">
-            <td>
-                <div class="flex align-items-center">
-                    <!-- <span class="border-circle mr-2 bg-green-500"
-                        style="width: 7px; height: 7px;"></span> -->
-                    <p class="mt-0 mb-0 font-medium text-lg text-color-primary">PAN</p>
-                </div>
-            </td>
-            <td>
-                <p class="mt-0 mb-0 font-normal text-base text-color-secondary">qioeq3123c</p>
-            </td>
-            
-        </tr>
-      
-        <tr class="ng-star-inserted">
-            <td>
-                <div class="flex align-items-center">
-                    <!-- <span class="border-circle mr-2 bg-orange-500"
-                        style="width: 7px; height: 7px;"></span> -->
-                    <p class="mt-0 mb-0 font-medium text-lg text-color-primary">Bank Account No</p>
-                </div>
-            </td>
-            <td>
-                <p class="mt-0 mb-0 font-normal text-base text-color-secondary">1923183921083</p>
-            </td>
-            <!-- <td>
-                <p class="mt-0 mb-0 font-normal text-base text-color-secondary">5 users</p>
-            </td>
-            <td><button type="button" pbutton="" icon="pi pi-ellipsis-v"
-                    class="p-element p-button-text p-button-secondary p-button p-component p-button-icon-only"><span
-                        class="p-button-icon pi pi-ellipsis-v" aria-hidden="true"></span></button>
-               
-            </td> -->
-        </tr>
-  
-    </tbody>
-  
-</table>
-
-    </div>
-    <div class="col-12 md:col-4 text-right ">
-         
-    <div class="surface-card shadow-4 border-round p-3" style="border-radius: 6px;">
-        <div class="flex justify-content-between align-items-center text-center">
-            <div>
-                <div class="text-xl font-medium text-900 mb-2 ">Employee Net Pay </div>
-            </div>
-            
-        </div>
-        <ul class="list-none m-0 p-0">
-            <li class="px-0 py-2 flex justify-content-between align-items-center border-bottom-1 surface-border"><span
-                    class="text-600 font-medium text-sm">Payment</span><span class="text-900 font-medium text-sm">
-                    11:30</span></li>
-            <li class="px-0 py-2 flex justify-content-between align-items-center border-bottom-1 surface-border"><span
-                    class="text-600 font-medium text-sm">Paid Days</span><span
-                    class="text-900 font-medium text-sm">30</span></li>
-            <li class="px-0 py-2 flex justify-content-between align-items-center"><span
-                    class="text-600 font-medium text-sm"> LOP Days</span><span
-                    class="text-900 font-medium text-sm">12</span></li>
-        </ul>
-    </div>
-    </div>
-    <div class="col-12 md:col-6">
-      
-        <div class="border-round p-4">
-    <div class="flex justify-content-between align-items-center mb-5">
-        <span class="text-xl text-900 font-medium">Earning</span>
-        <div>
-            <span class="text-xl text-900 font-medium">Amount</span>
-            
-                <!---->
-        </div>
-    </div>
-    <ul class="list-none p-0 m-0">
-        <li class="flex flex-column md:flex-row md:align-items-center md:justify-content-between mb-4">
-            <div class="flex">
-                <div>
-                    <span class="block text-900 font-medium mb-1">Basic</span>      
-                </div>
-            </div>
-            <div class="mt-2 md:mt-0 flex flex-nowrap">
-                <div class="text-600">10,000</div>
+	<div class="card" *ngIf="salArr" #pdfTable>
+        <header>
+                <h1>{{salArr.organizationDetail.name}}</h1>
+                <div class="grid">
+                    <div class="col-6 text-center">
+                        <ul>
+                            <li>{{salArr.organizationDetail.address.street}}</li>
+                            <li>{{salArr.organizationDetail.address.city}}</li>
+                            <li>{{salArr.organizationDetail.address.state}}</li>
+                        </ul>
                     </div>
-        </li>
-        <li class="flex flex-column md:flex-row md:align-items-center md:justify-content-between mb-4">
-            <div class="flex">
-                <div>
-                    <span class="block text-900 font-medium mb-1">House Rent Allowance</span>      
+                    <div class="col-6 text-center">
+                        <!-- <span> -->
+                            <img alt="" height="100" width="150" [src]="salArr.organizationDetail.logoUrl">
+                            <!-- </span> -->
+                    </div>
                 </div>
-            </div>
-            <div class="mt-2 md:mt-0 flex flex-nowrap">
-                <div class="text-600">10,010</div>
+                
+                
+            </header>
+            <article>
+                <div class="grid text-center align-items-start">
+                    
+                    <div class="col-6">
+                        <h4>
+                            Payslip for the month of {{salArr.month |uppercase}} - {{salArr.year}}
+                        </h4>
+                        <ul>
+                          
+                            <li>
+                                {{salArr.userDetail.name | uppercase}}
+                            </li>
+                            <li>
+                                {{salArr.userDetail.contact}}
+                            </li>
+                            <li>
+                                {{salArr.userDetail.email}}
+                            </li>
+                        </ul>
                     </div>
-        </li>
-        <li class="flex flex-column md:flex-row md:align-items-center md:justify-content-between mb-4">
-            <div class="flex">
-                <div>
-                    <span class="block text-900 font-medium mb-1">Transport Allowance</span>      
+                    <div class="col-6">
+                        <table class="meta">
+                            <tr>
+                                <th><span>Slip no #</span></th>
+                                <td><span>{{salArr._id}}</span></td>
+                            </tr>
+                            <tr>
+                                <th><span>Created At</span></th>
+                                <td><span>{{salArr.createdAt | date:'short'}}</span></td>
+                            </tr>
+                            <tr>
+                                <th><span>Amount</span></th>
+                                <td><span>{{salArr.totalNetAmount | currency:"INR":"symbol"}}</span></td>
+                            </tr>
+                        </table>   
+                    </div>
                 </div>
-            </div>
-            <div class="mt-2 md:mt-0 flex flex-nowrap">
-                <div class="text-600">5,000</div>
+
+                
+                
+                <table class="inventory">
+                    <thead>
+                        <tr>
+                            <th><span >Earning</span></th>
+                            <th><span >Amount</span></th>
+                            <th><span >Dedection</span></th>
+                            <th><span >Amount</span></th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>Basic</td>
+                            <td>{{salArr.basicAmount | currency:"INR":"symbol"}}</td>
+                           <td> Professional Tax </td>
+                           <td> {{salArr.professionalTax | currency:"INR":"symbol"}} </td>
+                        </tr>
+                        <tr>
+                            <td>House Rent Allowance</td>
+                            <td>{{salArr.houseRent | currency:"INR":"symbol"}}</td>
+                            <td>Other Tax</td>
+                            <td>{{salArr.otherTax | currency:"INR":"symbol"}}</td>
+                        </tr>
+                        <tr>
+                            <td>Transport Allowance</td>
+                            <td>{{salArr.transportAllowance | currency:"INR":"symbol"}}</td>
+                            <td>-</td>
+                            <td>-</td>
+                        </tr>
+                        <tr>
+                            <td> Medical </td>
+                            <td> {{salArr.mdeical | currency:"INR":"symbol"}} </td>
+                            <td>-</td>
+                            <td>-</td>
+                        </tr>
+                        <tr>
+                            <td> Fixed Allowance </td>
+                            <td> {{salArr.fixedAllowance | currency:"INR":"symbol"}} </td>
+                            <td>-</td>
+                            <td>-</td>
+                        </tr>
+                       
+                    </tbody>
+                </table>
+                <div class="grid text-center align-items-start justify-content-center">
+                    <div class="col-8">
+                        <table class="balance">
+                        <tr>
+                            <th><span></span>Gross Earning </th>
+                            <td><span>{{salArr.grossEarning | currency:"INR":"symbol"}}</span></td>
+                        </tr>
+                        <tr>
+                            <th><span>Total Deduction</span></th>
+                            <td><span>{{salArr.deductionAmount | currency:"INR":"symbol"}}</span></td>
+                        </tr>
+                        <tr>
+                            <th><span>Net Total</span></th>
+                            <td><span>{{salArr.totalNetAmount | currency:"INR":"symbol"}}</span></td>
+                        </tr>
+                    </table>
                     </div>
-        </li>
-        <li class="flex flex-column md:flex-row md:align-items-center md:justify-content-between mb-4">
-            <div class="flex">
-                <div>
-                    <span class="block text-900 font-medium mb-1">Medical</span>      
                 </div>
-            </div>
-            <div class="mt-2 md:mt-0 flex flex-nowrap">
-                <div class="text-600">1000</div>
-                    </div>
-        </li>
-        <li class="flex flex-column md:flex-row md:align-items-center md:justify-content-between mb-4">
-            <div class="flex">
-                <div>
-                    <span class="block text-900 font-medium mb-1">Fixed Allowance</span>      
+            </article>
+            <aside>
+                <h1><span >Additional Notes</span></h1>
+                <div class="text-center">
+                    <p>-- This is a system generated payslip, hence the signature is not required. --</p>
                 </div>
-            </div>
-            <div class="mt-2 md:mt-0 flex flex-nowrap">
-                <div class="text-600">2000</div>
-                    </div>
-        </li>
-        <li class="flex flex-column md:flex-row md:align-items-center md:justify-content-between mb-4">
-            <div class="flex">
-                <div>
-                    <span class="block text-900 font-medium mb-1">Gross Earnings </span>      
-                </div>
-            </div>
-            <div class="mt-2 md:mt-0 flex flex-nowrap">
-                <div class="text-600">₹27,000.00</div>
-                    </div>
-        </li>
-       
-    </ul>
-</div>
+            </aside>
     </div>
-    <div class="col-12 md:col-6 align-self-start">
-        <div class="border-round p-4">
-            <div class="flex justify-content-between align-items-center mb-5">
-                <span class="text-xl text-900 font-medium">Deductions</span>
-                <div>
-                    <span class="text-xl text-900 font-medium">Amount</span>
-                </div>
-            </div>
-            <ul class="list-none p-0 m-0">
-                <li class="flex flex-column md:flex-row md:align-items-center md:justify-content-between mb-4">
-                    <div class="flex">
-                        <div>
-                            <span class="block text-900 font-medium mb-1">Professional Tax</span>      
-                        </div>
-                    </div>
-                    <div class="mt-2 md:mt-0 flex flex-nowrap">
-                        <div class="text-600">10,000</div>
-                            </div>
-                </li>
-
-                <li class="flex flex-column md:flex-row md:align-items-center md:justify-content-between mb-4">
-                    <div class="flex">
-                        <div>
-                            <span class="block text-900 font-medium mb-1">Other Tax</span>      
-                        </div>
-                    </div>
-                    <div class="mt-2 md:mt-0 flex flex-nowrap">
-                        <div class="text-600">10,000</div>
-                            </div>
-                </li>
-                <li class="flex flex-column md:flex-row md:align-items-center md:justify-content-between mb-4">
-
-                </li>
-                <li class="flex flex-column md:flex-row md:align-items-center md:justify-content-between mb-5">
-
-                </li>
-                <li class="flex flex-column md:flex-row md:align-items-center md:justify-content-between mb-5">
-
-                </li>
-                <li class="flex flex-column md:flex-row md:align-items-center md:justify-content-between mb-5">
-
-                </li>
-                <li class="flex flex-column md:flex-row md:align-items-center md:justify-content-between mb-4">
-
-                </li>
-                <li class="flex flex-column md:flex-row md:align-items-center md:justify-content-between  mb-4">
-                    <div class="flex">
-                        <div>
-                            <span class="block text-900 font-medium mb-1">Total Deductions</span>      
-                        </div>
-                    </div>
-                    <div class="mt-2 md:mt-0 flex flex-nowrap">
-                        <div class="text-600">10,000</div>
-                            </div>
-                </li>
-            </ul>
-
-            </div>
-        <!-- <table>
-            <tr>
-                <th>Deductions</th>
-                <th>Amount</th>
-            </tr>
-            <tr>
-                <td>Professional Tax  </td>
-                <td> -- </td>
-            </tr>
-            <tr>
-                <td> Other Tax </td>
-                <td> -- </td>
-            </tr>
-            <tr>
-                <td> Other Tax </td>
-                <td> -- </td>
-            </tr>
-            <tr>
-                <td> Other Tax </td>
-                <td> -- </td>
-            </tr>
-            <tr>
-                <td> Other Tax </td>
-                <td> -- </td>
-            </tr>
-
-        </table> -->
-    </div>
-    <div class="col-12">
-      
-    <div class="md:px-4 px-2 py-4 surface-section ng-star-inserted">
-    <div class="shadow-2 flex flex-wrap justify-content-between align-content-center px-4 md:px-8"
-        style="background: linear-gradient(90deg, #ccf3c2 0%, #526A76 100%); border-radius: 8px;">
-        <div class="flex align-items-start py-3">
-            <div><span
-                    class="inline-flex border-circle justify-content-center align-items-center text-white bg-green-500 mr-4"
-                    style="width: 38px; height: 38px;"><i class="pi pi-check-circle text-xl"></i></span></div>
-            <div>
-                <div class="font-bold mb-1">Total Net Payable ₹26,800.00</div><span class="">
-                    (Indian Rupee Twenty-Six Thousand Eight Hundred Only).</span>
-            </div>
-        </div><a pripple=""
-            class="p-ripple p-element cursor-pointer bg-bluegray-500  px-3 py-2 line-height-3 my-3 hover:bg-bluegray-400 transition-colors transition-duration-150"
-            style="border-radius: 35px;text-decoration: none;"><span>Summary</span><i class="ml-2 pi pi-arrow-right"></i><span
-                class="p-ink"></span></a>
-    </div>
-</div>
-    </div>
-    <div class="col-12">
-        <div class="py-2 surface-section ng-star-inserted">
-    <div
-        class=" text-gray-900 p-2 flex justify-content-between lg:justify-content-center align-items-center flex-wrap">
-        <div class="align-items-center hidden lg:flex"><span class="line-height-3">-- This is a system generated payslip, hence the signature is not required. --</span></div>
-        
-        
-    </div>
-</div>
-    </div>
-</div>

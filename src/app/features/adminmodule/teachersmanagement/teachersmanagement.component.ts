@@ -53,6 +53,19 @@ export class TeachersmanagementComponent implements OnInit {
     })
   }
 
+  onUpload(event,fileUpload){
+    let File = event.files[0]
+    let formdata = new FormData();
+    formdata.append('users',File)
+    this.profile.fnCreateBulk(formdata).subscribe((x:any)=>{
+      if(x.success){
+        this.global.showToast('success',x.message,x.status);
+        this.getUser();
+      }
+    })
+    fileUpload.clear();
+  }
+
   exportExcel() {
    this.global.exportExcel(this.teacherUsers,"Teacher")
   }

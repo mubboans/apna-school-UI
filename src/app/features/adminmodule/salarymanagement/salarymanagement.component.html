@@ -1,4 +1,4 @@
-<div class="card p-3 px-4">
+<div class="card p-3 px-4" >
     <p-toolbar styleClass="mb-4">
         <ng-template pTemplate="left">
             <button pButton pRipple label="New" icon="pi pi-plus" class="p-button-success mr-2" (click)="openNew()"></button>
@@ -42,13 +42,16 @@
         </ng-template>
         <ng-template pTemplate="body" let-product>
             <tr>
-                <td>{{product.organizationName | uppercase}}</td>
-                <td> <img [src]="product.logoUrl" width="100" class="p-shadow-4" /></td>
+                <td>{{product.organizationDetail.name ?product.organizationDetail.name:'-' | uppercase}}</td>
+                <td> <img [src]="product.organizationDetail.logoUrl" width="100" class="p-shadow-4" /></td>
                 <td>{{product.month}}</td>
                 <td>{{product.year}}</td>
                 <td><p-chip label=" {{product.userDetail.name}}" icon="pi pi-users"></p-chip></td>
                 <td>{{product.totalNetAmount}}</td>
                 <td>
+                    <button pButton pRipple icon="pi pi-download" pTooltip="Salary pdf" tooltipPosition="bottom"
+                     class="p-button-rounded p-button-danger mr-2" (click)="downloadPdf(product._id)"></button>    
+
                     <button pButton pRipple icon="pi pi-pencil" pTooltip="Edit" tooltipPosition="bottom"
                      class="p-button-rounded p-button-success mr-2" (click)="edit(product)"></button>    
                     <button pButton pRipple icon="pi pi-trash" pTooltip="Delete" tooltipPosition="bottom"
@@ -62,22 +65,29 @@
             </div>
         </ng-template>
     </p-table>
-    
+    <!-- <app-salary-slip *ngIf="salaryArr" [salArr]="salaryArr"></app-salary-slip> -->
 </div>
-
+ 
+<p-dialog id="salslip" [showHeader]="false"  [(visible)]="salaryModal" [breakpoints]="{'960px': '75vw', '640px': '50vw'}" [modal]="true" [style]="{width: '90vw'}" header="Account Details" styleClass="p-fluid">
+    
+    <app-salary-slip *ngIf="salaryModal" (bookTitleCreated)=generatePdf($event) [salArr]="salaryShowObj"></app-salary-slip>
+    
+</p-dialog>
 <p-dialog [(visible)]="salaryDialog" [breakpoints]="{'960px': '75vw', '640px': '50vw'}" [modal]="true" [style]="{width: '50vw'}" header="Account Details" styleClass="p-fluid">
     <ng-template pTemplate="content">
         <div class="card">
             <h5>Salary Form</h5>
             <div class="formgrid grid">
                 <div class="field col-12 md:col-6">
-                    <label for="firstname6">Organization name</label>
-                    <input id="firstname6" pInputText type="text" [(ngModel)]="salaryObj.organizationName" class="text-base text-color surface-overlay p-2 border-1 border-solid surface-border border-round appearance-none outline-none focus:border-primary w-full">
+                    <label for="firstname6">Organization</label>
+                    <p-dropdown [options]="organizationArr" [(ngModel)]="salaryObj.organizationID" required optionLabel="name" optionValue="id"
+                    [filter]="true" filterBy="name" [showClear]="true" placeholder="Select a Organization"></p-dropdown>
+                    <!-- <input id="firstname6" pInputText type="text" [(ngModel)]="salaryObj.organizationName" class="text-base text-color surface-overlay p-2 border-1 border-solid surface-border border-round appearance-none outline-none focus:border-primary w-full"> -->
                 </div>
-                <div class="field col-12 md:col-6">
+                <!-- <div class="field col-12 md:col-6">
                     <label for="firstname6">Logo Url (Optional)</label>
                     <input id="firstname6" pInputText [(ngModel)]="salaryObj.logoUrl" type="text" class="text-base text-color surface-overlay p-2 border-1 border-solid surface-border border-round appearance-none outline-none focus:border-primary w-full">
-                </div>
+                </div> -->
                 <div class="field col-12 md:col-6">
                     <label for="firstname6">Users</label>
                     <p-dropdown [options]="studentUsers" [(ngModel)]="salaryObj.userId" required optionLabel="name" optionValue="id"
@@ -89,8 +99,8 @@
                     <p-dropdown [options]="months" [(ngModel)]="salaryObj.month" required optionLabel="name" optionValue="value"
                     [filter]="true" filterBy="name" [showClear]="true" placeholder="Select a Month"></p-dropdown>
 
-                    <!-- <p-calendar [(ngModel)]="salaryObj.month" view="month" dateFormat="mm/yy" [yearNavigator]="true" yearRange="2000:2030" [readonlyInput]="true" inputId="monthpicker"></p-calendar> -->
-                  
+                   
+                    
                 </div>
                 <div class="field col-12 md:col-6">
                     <label for="firstname6">Year</label>
@@ -136,38 +146,9 @@
                     <input id="firstname6" pInputText [(ngModel)]="salaryObj.otherTax" type="number" class="text-base text-color surface-overlay p-2 border-1 border-solid surface-border border-round appearance-none outline-none focus:border-primary w-full">
                 </div>
 
-                <!-- "grossEarning": 7000, -->
-                <!-- "deductionAmount": 150, -->
-                <!-- "totalNetAmount": 6850, -->
-               
             </div>
         </div>
-        <!-- <div class="p-field mb-3 p-2">
-            <label for="name">Organization name</label>
-            <input type="text" pInputText id="name" [(ngModel)]="salaryObj.organizationName" required autofocus />
-        </div>
-       <div class="p-field mb-3 p-2">
-            <label for="inventoryStatus">Logo Url</label>
-            <input type="text" pInputText id="name" [(ngModel)]="salaryObj.logoUrl" required autofocus />
-        </div>
-
-        <div class="p-field mb-3 p-2">
-            <label class="p-mb-3">Month</label>
-            <input type="text" pInputText id="name" maxlength="10" [(ngModel)]="salaryObj.month" required autofocus />
-        </div>
-
-        <div class="p-field mb-3 p-2">
-            <label class="p-mb-3">Year</label>
-            <input type="date" pInputText id="name" [(ngModel)]="salaryObj.year" required autofocus />
-        </div>
-        
-
-            <div class="p-field p-col mb-3">
-                <label for="price">Users</label>
-                <p-dropdown [options]="studentUsers" [(ngModel)]="salaryObj.userId" required optionLabel="name" optionValue="id"
-                        [filter]="true" filterBy="name" [showClear]="true" placeholder="Select a Name"></p-dropdown>
-            </div>
-          -->
+    
     </ng-template>
 
     <ng-template pTemplate="footer">
