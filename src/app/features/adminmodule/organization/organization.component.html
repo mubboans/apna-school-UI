@@ -1,34 +1,25 @@
 <div class="card p-3 px-4" >
-    <p-toolbar styleClass="mb-4">
-        <ng-template pTemplate="left">
-            <button pButton pRipple label="New" icon="pi pi-plus" class="p-button-success mr-2" (click)="openNew()"></button>
-            <!-- <button pButton pRipple [label]="Delete" icon="pi pi-trash" pTooltip="Bulk Delete" tooltipPosition="bottom" class="p-button-danger mr-2" (click)="deleteSelectedAccount()" [disabled]="!selectedStudents || !selectedStudents.length"></button> -->
-        </ng-template>
-
-        <ng-template pTemplate="right">
-            <!-- <p-fileUpload mode="basic" accept=".xlsx, .xls, .csv" [maxFileSize]="1000000" label="Import" chooseLabel="Import" class="mr-2 p-d-inline-block"></p-fileUpload> -->
-            <button pButton pRipple label="Export" (click)="exportExcel()" icon="pi pi-file-excel" class="p-button-success" pTooltip="Export data to XLS" tooltipPosition="bottom"></button>
-        </ng-template>
-    </p-toolbar>
-
+   
+ <div class="card-header line-height-4 mb-3">
+    <div>
+        <span class="tab-head">Organization List</span>
+    </div>
+    <div>
+        <span class="p-input-icon-left">
+            <i class="pi pi-search"></i>
+            <input pInputText type="text" (input)="dt.filterGlobal($event.target.value, 'contains')" placeholder="Search..." />
+        </span>
+    </div>
+    
+ </div>
+  <div class="card-header line-height-4 mb-3">
+    <button pButton pRipple label="New" icon="pi pi-plus" class="p-button-success mr-2" (click)="openNew()"></button>
+    <button pButton pRipple label="Export" (click)="exportExcel()" icon="pi pi-file-excel" class="p-button-success" pTooltip="Export data to XLS" tooltipPosition="bottom"></button>
+ </div>
     <p-table #dt [value]="orgArr" [rows]="10" [paginator]="true" [globalFilterFields]="['name','pan','bankaccount','upiId']"
      [rowHover]="true" dataKey="name" styleClass="p-datatable-responsive-demo"
         currentPageReportTemplate="Showing {first} to {last} of {totalRecords} entries" [showCurrentPageReport]="true">
-        <ng-template pTemplate="caption">
-            <div class="grid">
-                <div class="col-4 md:col-6 text-start">
-                    <h3 class="p-m-0">Organization List</h3>
-                </div>
-                <div class="col-8 md:col-6 text-right">
-                    <span class="p-input-icon-left">
-                        <i class="pi pi-search"></i>
-                        <input pInputText type="text" (input)="dt.filterGlobal($event.target.value, 'contains')" placeholder="Search..." />
-                    </span>
-                </div>
-            </div>
-
-        </ng-template>
-        <ng-template pTemplate="header">
+       <ng-template pTemplate="header">
             <tr>
                
                 <th pSortableColumn="organizationName">Organization Name<p-sortIcon field="organizationName"></p-sortIcon></th>
@@ -54,13 +45,13 @@
                     <button pButton pRipple icon="pi pi-pencil" pTooltip="Edit" tooltipPosition="bottom"
                      class="p-button-rounded p-button-success mr-2" (click)="edit(product)"></button>    
                     <button pButton pRipple icon="pi pi-trash" pTooltip="Delete" tooltipPosition="bottom"
-                     class="p-button-rounded p-button-warning" (click)="delete(product._id)"></button>
+                     class="p-button-rounded p-button-warning" (click)="deleteorg(product._id)"></button>
                 </td>
             </tr>
         </ng-template>
         <ng-template pTemplate="summary">
             <div class="p-d-flex p-ai-center p-jc-between">
-                In total there are {{salaryArr ? salaryArr.length : 0 }} products.
+                In total there are {{orgArr ? orgArr.length : 0 }} Organization Listed.
             </div>
         </ng-template>
     </p-table>
@@ -68,10 +59,9 @@
 </div>
  
 
-<p-dialog [(visible)]="orgDialog" [breakpoints]="{'960px': '75vw', '640px': '50vw'}" [modal]="true" [style]="{width: '50vw'}" header="Account Details" styleClass="p-fluid">
+<p-dialog [(visible)]="orgDialog" [breakpoints]="{'960px': '85vw', '640px': '80vw'}" [modal]="true" header="Organization Form" styleClass="p-fluid">
     <ng-template pTemplate="content">
         <div class="card">
-            <h5>Organization Form</h5>
             <div class="formgrid grid">
                 <div class="field col-12 md:col-6">
                     <label for="firstname6">Name</label>
@@ -124,7 +114,7 @@
     </ng-template>
 
     <ng-template pTemplate="footer">
-        <button pButton pRipple label="Cancel" icon="pi pi-times" class="p-button-text p-button-danger " (click)="hideDialog()"></button>
+        <button pButton pRipple label="Cancel" icon="pi pi-times" class="p-button-text p-button-danger" (click)="hideDialog()"></button>
         <button pButton pRipple label="Save" icon="pi pi-check" class="p-button-text p-button-success" (click)="saveProduct()"></button>
     </ng-template>
 </p-dialog>

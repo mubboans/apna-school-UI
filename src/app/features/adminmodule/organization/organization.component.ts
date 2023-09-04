@@ -35,7 +35,7 @@ export class OrganizationComponent implements OnInit {
     this.submitted = false;
     this.orgDialog = true;
   }
-  deleteAccount(id) {
+  deleteorg(id) {
     this.admin.fnDeleteOrg(id).subscribe((x: any) => {
       if (x.success) {
         this.global.showErrorToast(x.message, x.status);
